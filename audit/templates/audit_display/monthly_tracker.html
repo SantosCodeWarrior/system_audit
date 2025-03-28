@@ -1,0 +1,291 @@
+{% extends "base.html" %}
+{% block content %}
+
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+<script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+
+<style type="text/css">
+	.modal-content {		
+    	width: 173%;
+    	margin-left: -110px;
+	}
+</style>
+
+<script type="text/javascript">
+function submittab(){	
+	var data 	 = tab_table.getData();	
+	data 		 = tab_table.getData();	
+	data_cleaned = [];
+	var i = 0;
+	while(true){
+		if(data[i]['use_name'] != null ){			
+			data_cleaned.push(data[i]['use_name']);
+			i++;
+		}
+		else{
+			break;
+		}
+	}
+
+
+	
+	$.ajax({
+	    url : "/audit/submit_tracker_entry/",
+	    type : "get",
+	    dataType : "json",
+	    data:{
+	    	tabs_name: JSON.stringify(data),	    	
+	    	csrfmiddlewaretoken: ''
+	    },
+	    success:function(obj_data){	    	
+	    	
+	    	alert(JSON.stringify(obj_data,null,4));
+	    	get_reports()
+	    },
+	    error:function(err){
+	    	
+	    }
+  	});
+
+}
+</script>
+
+
+<div class = "box box-success">
+    <div class="box-header with-border">
+		<center><h2 style="color:#002457">Monthly Tracker</h2></center>
+		<div class = "col-md-12" style="height:100%">
+    		<div class = 'handsontable' style="height: 400px; overflow: auto; margin-top : 30px;" data-originalstyle="height: 300px; overflow: auto"  id="wfh_system_details"></div>
+    		<button class="btn btn-success" style = "margin : 20px" id = "tab_type" onclick = "submittab()" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Loading">Submit</button>
+		</div>    
+	</div>
+
+	<div class = "col-md-12">
+		<table class="table table-bordered" id="get_tracker" style="font-size: 10px;color:black;width: 100%;display: none">
+			<thead>
+				<th style="font-weight: bold;background-color: #28b779;color:white">S.N.</th>
+				<th style="font-weight: bold;background-color: #28b779;color:white">Billin Date</th>
+				<th style="font-weight: bold;background-color: #28b779;color:white">Provider/Suppliers</th>
+				<tH style="font-weight: bold;background-color: #28b779;color:white">Name of Staff Member</tH>
+				<th style="font-weight: bold;background-color: #28b779;color:white">Bill No.</th>
+				<th style="font-weight: bold;background-color: #28b779;color:white">Nature of Expenses</th>
+				<th style="font-weight: bold;background-color: #28b779;color:white">Amount-USD</th>
+				<th style="font-weight: bold;background-color: #28b779;color:white">Amount-SGD</th>
+				<th style="font-weight: bold;background-color: #28b779;color:white">Amount-EURO</th>
+				<th style="font-weight: bold;background-color: #28b779;color:white">Amount-INR</th>
+				<th style="font-weight: bold;background-color: #28b779;color:white">Total</th>
+				<th style="font-weight: bold;background-color: #28b779;color:white">Remarks</th>
+				<th style="font-weight: bold;background-color: #28b779;color:white"></th>
+			</thead>
+			{% for c in track_array %}
+			<tr>
+				<td>{{c.id}}</td>
+				<td style="white-space: nowrap;">{{c.billing_date}}</td>
+				<td>{{c.service_provider}}</td>
+				<td>{{c.staff_member}}</td>
+				<td>{{c.bill_no}}</td>
+				<td>{{c.nature_expense}}</td>
+				<td>{{c.amount_usd}}</td>
+				<td>{{c.amount_sgd}}</td>
+				<td>{{c.amount_euro}}</td>
+				<td>{{c.amount_inr}}</td>
+				<td>{{c.total}}</td>
+				<td>{{c.remarks|default_if_none:""}}</td>
+				<td><button class="btn btn-success" style="font-size: 10px">EDIT</button></td>
+				{% endfor %}
+			</tr>
+			
+		</table>
+	</div>
+</div>
+
+
+
+<script type="text/javascript">
+	var data = [
+		{
+			userID 				: '',
+			billing_date 		: '',
+			service_provider 	: '',			
+			staff_member 		: '',
+			bill_no  	 		: '',
+			nature_expense 	 	: '',
+			amount_usd 		 	: 0.0,
+			amount_sgd 	 		: 0.0,
+			amount_euro 	 	: 0.0,
+			amount_inr 	 		: 0.0,
+			total  				: 0.0,
+			taxable 			: 0.0,		
+			remarks 	 		: '',
+		}
+	];
+    container     = document.getElementById('wfh_system_details');
+  	var tab_table = new Handsontable(container, {    
+    colHeaders: true,
+    minSpareRows: 1,
+    stretchH: 'all',
+    colHeaders: ['ID','Billing Date','Name of Servicer Provider/Suppliers','Name of Staff Member','Bill No.','Nature of Expenses','Amount-USD','Amount-SGD','Amount-EURO','Amount-INR','Taxable','Total','Remarks'],
+    contextMenu: true,
+    columns: 
+    [
+    	{	data: "userID",
+	    	type : 'text',
+		    readOnly: true,
+		    renderer: colorRenderer3,
+		},
+  
+    	{	data: "billing_date",
+	    	type : 'date',
+	    	dateFormat: 'YYYY-MM-DD',
+	    	correctFormat: true,
+		    renderer: colorRenderer3,
+		},
+  
+	  	{
+	    	data: "service_provider",
+	    	type : 'text',
+	    	renderer: colorRenderer3,	
+	    	
+	    },
+
+	    {
+	    	data: "staff_member",
+	    	type : 'text',
+	    	renderer: colorRenderer3,		    	
+	    },
+
+	    {
+	    	data: "bill_no",
+	    	type : 'text',	
+	    	renderer: colorRenderer3,    	
+	    },
+
+	    {
+	    	data: "nature_expense",
+	    	type : 'text',
+	    	renderer: colorRenderer3,	    	
+	    },
+
+	    {
+	    	data: "amount_usd",
+	    	type : 'numeric',	
+	    	renderer: colorRenderer3,    	
+	    },
+
+	    {
+	    	data: "amount_sgd",
+	    	type : 'numeric',	
+	    	renderer: colorRenderer3,    	
+	    },
+
+	    {
+	    	data: "amount_euro",
+	    	type : 'numeric',
+	    	renderer: colorRenderer3,	    	
+	    },
+
+	    {
+	    	data: "amount_inr",
+	    	type : 'numeric',
+	    	renderer: colorRenderer3,	    	
+	    },
+
+	     {
+	    	data: "taxable",
+	    	type : 'numeric',
+	    	renderer: colorRenderer3,	    	
+	    },
+
+	    {
+	    	data: "total",
+	    	type : 'numeric', 
+	    	renderer: colorRenderer3,
+	    },
+	    
+	    {
+	    	data: "remarks",
+	    	type : 'text',
+	    	renderer: colorRenderer3,
+	    }
+
+	  ],
+	  data: data,
+  });
+
+
+
+	tab_table.updateSettings({
+ 		afterDocumentKeyDown:function(e){
+ 			var selection = tab_table.getData();	
+ 			if(e.keyCode===13)
+ 			{
+ 				var datava5      	= tab_table.getData(); 				
+				amount  			= (parseFloat(selection[0][6]) + parseFloat(selection[0][7]) + parseFloat(selection[0][8]) + parseFloat(selection[0][9]) + parseFloat(selection[0][10])); 				
+ 				datava5[0]['total'] = amount.toFixed(2);
+ 				
+ 				if(datava5[0]['total']=='NaN'  || selection[0][6]=='NaN' || selection[0][7]=='NaN' || selection[0][8]=='NaN' || selection[0][9]=='NaN' || selection[0][10]=='NaN')
+ 				{
+					//tab_table.loadData(0);
+				}else{
+ 					//tab_table.loadData(datava5);
+				}
+ 			}
+ 		}
+ 	});
+
+get_reports();
+$('#hot-display-license-info').css('display','none');
+
+function get_reports(){
+	$.ajax({
+		url : "/audit/system_tracker_details/",
+		type : "get",
+
+		dataType : "json",
+		data : { 
+			
+		},
+		success : function(obj_data){			
+			// if(obj_data['tracker_array'].length>0)
+			// {
+			tab_table.loadData(obj_data['tracker_array']);
+				
+			// }
+			// else
+			// {
+			// 	tab_table.loadData(obj_data['tracker_array']);			
+			// }	
+			
+		},
+		error: function(err){
+			
+		}
+	});	
+}
+
+
+
+ function colorRenderer3(instance, td, row, col, prop, value, cellProperties) {
+    Handsontable.renderers.TextRenderer.apply(this, arguments);
+    var data = instance.getData();
+    var valueAtC = data[row][10];   
+    if (valueAtC !='None') {
+      td.style.backgroundColor = '';
+    } else {
+      td.style.backgroundColor = '#fc8195';
+    }
+    return td;
+  };
+
+
+</script>
+
+
+{% endblock %}
+
+
+
+
+

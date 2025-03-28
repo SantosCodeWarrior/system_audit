@@ -1,0 +1,605 @@
+{% extends "base.html" %}
+{% block content %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+
+
+
+
+<style type="text/css">
+	textarea {
+   resize: none;
+}
+
+
+input[type=text] {
+    
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  outline: none;
+}
+
+input[type=text]:focus {
+  border: 3px solid #555;
+}
+
+input[type=date] {
+    
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  outline: none;
+}
+
+input[type=date]:focus {
+  border: 3px solid #555;
+}
+
+input[type=number] {
+    
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  outline: none;
+}
+
+input[type=number]:focus {
+  border: 3px solid #555;
+}
+
+input[type=select] {
+    
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  outline: none;
+}
+
+input[type=select]:focus {
+  border: 3px solid #555;
+}
+
+table {
+   border-collapse: collapse;
+}
+
+
+
+/* Button used to open the chat form - fixed at the bottom of the page */
+.open-button {
+  background-color: #555;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  opacity: 0.8;
+  position: fixed;
+  bottom: 23px;
+  right: 28px;
+  width: 280px;
+}
+
+/* The popup chat - hidden by default */
+.chat-popup {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  right: 15px;
+  border: 3px solid #f1f1f1;
+  z-index: 9;
+}
+
+/* Add styles to the form container */
+.form-container {
+  max-width: 300px;
+  padding: 10px;
+  background-color: white;
+}
+
+/* Full-width textarea */
+.form-container textarea {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: #f1f1f1;
+  resize: none;
+  min-height: 200px;
+}
+
+/* When the textarea gets focus, do something */
+.form-container textarea:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+/* Set a style for the submit/send button */
+.form-container .btn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom:10px;
+  opacity: 0.8;
+}
+
+/* Add a red background color to the cancel button */
+.form-container .cancel {
+  background-color: red;
+}
+
+/* Add some hover effects to buttons */
+.form-container .btn:hover, .open-button:hover {
+  opacity: 1;
+}
+
+
+</style>
+
+
+
+ <div class="card">
+    <div class="card-body">
+		<div class="col-md-12">   
+			<h3 id="header"><center><img src="/static/img/jio.png" style="width:50px;height: 50px">&nbsp;&nbsp;Recharge Reminder<img src="/static/img/airtel.png"  style="width:50px;height: 50px;margin-left: 14px;"></center></h3><br><br>		
+			<div class="container">
+			    <div class="">
+			    	<button class="insert btn btn-info insert_info" data-toggle="modal" data-target="#myModalx" style="margin-left: 12px">New</button>
+			    	<br>
+			    	<p>&nbsp;</p>
+			    	<div id="voyage_details1" class="col-md-12" style="overflow-x: scroll">
+					    <table class="table table-bordered" style="border: 1px solid grey;width: 100px" id="send_table1">
+					    	<tr>
+					    		<thead style="background-color: #28b779;color:white">
+					    			<th></th>
+					    			<th></th>
+					    			<th>View</th>
+					    			<th>S.No</th>
+					    			<th style="display: none;"></th>
+					    			<th style="display: none"></th>
+					    			<th style="white-space: nowrap;">Recharge Date</th>
+					    			<th style="white-space: nowrap;">Category</th>
+					    			<th style="white-space: nowrap;">Remaining Days</th>
+					    			<th style="white-space: nowrap;">Particulars Items</th>
+					    			<th>Amount</th>
+					    			<th style="white-space: nowrap;">Subscription Status</th>
+					    			<th>Link</th>
+					    			<th>Remarks</th>
+
+					    		</thead>			    		
+					    	</tr>
+					    		{% for c in plan_arr %}
+					    	<tr style="background-color: {{c.color_code}};">
+					    		<td><button class="edit btn btn-success edit_info" data-toggle="modal" data-target="#myModal" style="font-size: 10px" >Edit</button></td>
+					    		<td><button class="btn btn-danger delete_info" id="{{c.id}}" style="font-size: 10px">DELETE</button></td>
+					    		<td><a href="{{c.upload_doc}}" target="_blank">{{c.doc_label}}</a></td>
+					    		<td>{{forloop.counter}}</td>
+					    		<td style="display: none;" class="c_id">{{c.id}}</td>
+					    		<td style="display: none;white-space: nowrap;"  class="c_follow_up">{{c.remind_date}}</td>
+					    		<td style="white-space: nowrap;">{{c.follow_up}}</td>
+					    		<td class="c_plan_name"  style="white-space: nowrap;">{{c.plan_name}}</td>
+					    		<td class="c_alert_status"  style="white-space: nowrap;">{{c.alert_status}}</td>
+					    		<td class="c_pay_status"  style="white-space: nowrap;">{{c.pay_status}}</td>
+					    		<td class="c_amount">{{c.amount|floatformat:1}}</td>
+					    		<td><b style="color:{{c.active_color}}">{{c.status}}</b></td>
+					    		<td class="c_remarks" style="white-space: nowrap;">{{c.remarks|default_if_none:""|linebreaksbr}}</td>
+					    		<td class="c_statuss" style="white-space: nowrap;width: 50%">{{c.statuse|slice:":15"|default_if_none:""}}</td>
+					    		{% endfor %}
+					    	</tr>
+					    </table>
+				    </div>			             
+			    </div>
+			</div>	
+		</div>
+		<img src="/static/img/fiber.png" style="width: 300px;height: 250px;margin-left: -50px;">		
+		<table class="table table-bordered col-md-4" style="width: 47%;float: right;margin-right: 69px;border-radius: 112px">
+	    	<tr>
+	    		<thead>					    			
+	    			<th style="background-color: #28b779;color:white">Broadband Type</th>					    			
+	    			<th style="background-color: #28b779;color:white"></th>					    			
+	    		</thead>			    		
+	    	</tr>	    	
+	    	<tr>
+	    		<td>Airtel Fiber</td>
+	    		<td><a href="https://login.enet.net.in/selfcare/" target="_blank">Recharge</a></td>
+	    	</tr>
+	    	<tr>
+	    		<td>JIO Fiber</td>
+	    		<td><a href="https://www.jio.com/Enterprise/jio-business/ohs/Main/DashboardView/index.html#/dashboard-new" target="_blank">Recharge</a></td>
+	    	</tr>	
+
+	    		    	
+	    </table>
+	</div>
+</div>
+
+<div class="chat-popup" id="myForm">
+  <form action="/action_page.php" class="form-container">
+    <h1>Chat</h1>
+
+    <label for="msg"><b>Message</b></label>
+    <textarea placeholder="Type message.." name="msg" required></textarea>
+
+    <button type="submit" class="btn">Send</button>
+    <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+  </form>
+</div>
+
+
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+   
+    <div class="modal-content">
+      <div class="modal-header">
+
+       
+        <h4 class="modal-title">UPDATE</h4>
+      </div>
+      <div class="modal-body">
+
+      	<div class="form-group">
+	      <label for="gradeName">Details</label>
+	      <input type="text"  class="form-control" id="ee_c_pay_status" readonly="readonly">
+	    </div>
+
+        <div class="form-group">
+	      <label for="gradeName">Update Date (MM/DD/YYYY)<sup style="color:red">*</sup> </label>
+	      <input type="date"  class="form-control" id="ee_follow_up" style="background-color: #e9ecef">
+	    </div>
+
+	     <div class="form-group">
+	      <label for="gradeName">Amount<sup style="color:red">*</sup> </label>
+	      <input type="number"  class="form-control" id="ex_amount" style="background-color: #e9ecef">
+	    </div>
+
+	     <div class="form-group">
+	      <label for="gradeName">Link<sup style="color:red">*</sup> </label>
+	      <textarea type="text"  class="form-control" id="ex_remarks" style="background-color: #e9ecef"></textarea>
+	    </div>
+
+	     <div class="form-group">
+	      <label for="gradeName">Remarks<sup style="color:red">*</sup> </label>
+	      <textarea type="text"  class="form-control" id="ex_status" style="background-color: #e9ecef"></textarea>
+	    </div>
+
+	    
+
+
+	    <div id="ee_selectID" style="display: none"></div>
+
+
+	   
+
+		<div class="form-group">
+		<button type="button" class="btn btn-primary" id="update_details">Update</button>
+		</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="refresh">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<div id="myModalx" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+       
+        <h4 class="modal-title">INSERT</h4>
+      </div>
+      <div class="modal-body">
+
+      	<div class="form-group">
+	      <label for="gradeName">Recharge Date (MM/DD/YYYY)<sup style="color:red">*</sup></label>
+	      <input type="date"  class="form-control" id="ee_recharge">
+	    </div>
+
+        <div class="form-group">
+	      <label for="gradeName">Category<sup style="color:red">*</sup>&nbsp;&nbsp;&nbsp;<i style="font-size: 11px;color:red">(If you want to add more then add first then entry)</i> </label>
+	      <select class="form-control col-md-4" id="get_plan_details" style="height: 32px;">
+	      	<option value="0">Select</option>
+	      	{% for c in plan_type %}
+	      	<option value="{{c.id}}">{{c.plan_name}}</option>
+	      	{% endfor %}
+	      </select><button class="add btn btn-success add_info" data-toggle="modal" data-target="#more_add_plan" style="margin-top: -59px;margin-left: 194px;">Add</button>	     
+	    </div>
+
+	    <div class="form-group">
+	      <label for="gradeName">Internet Plan/Product Name<sup style="color:red">*</sup></label>
+	      <input type="text"  class="form-control" id="ee_items">
+	    </div>
+
+	    <div class="form-group">
+	      <label for="gradeName">Amount<sup style="color:red">*</sup></label>
+	      <input type="number"  class="form-control" id="ee_amount">
+	    </div>
+
+	    <div id="ee_selectID" style="display: none"></div>
+
+
+	   
+
+		<div class="form-group">
+		<button type="button" class="btn btn-primary" id="submit_details">Submit</button>
+		</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="refresh">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+ <div class="card" style="display:none ">
+    <div class="card-body">
+		<div class="col-md-12"> 
+			<div id="voyage_details" class="col-md-12" style="overflow-x: scroll">
+				<table style="border-collapse: collapse;font-size: 12px;border: 1px solid #D3D3D3;width: 70%;" border="1" cellspacing="2px" cellpadding="2px" id="send_table">
+					<thead style="background-color: #28b779;color: white;white-space: nowrap;">
+						<th>S.No</th>
+						<th>Recharge Date</th>
+						<th>Category</th>
+						<th style="text-align: center;">Remaining Days</th>
+						<th>Particulars Items</th>
+						<th>Amount</th>
+						<th>Subscription Status</th>
+						<th>Links</th>
+						<th>Remarks</th>
+					</thead>
+					<tr style="white-space: nowrap;">
+					{% for c in alert_Array %}
+						<td>{{c.id}}</td>
+						<td>{{c.alert_date}}</td>
+						<td>{{c.plan_name}}</td>
+						<td style="text-align: center;">{{c.remaining_day}}</td>
+						<td>{{c.payment_status}}</td>
+						<td>{{c.amount}}</td>
+						<td>{{c.status}}</td>
+						<td>{{c.remarks|linebreaksbr}}</td>
+						<td>{{c.check_status}}</td>
+						
+					</tr>
+					{% endfor %}
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+<div id="more_add_plan" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+
+       
+        <h4 class="modal-title">ADD</h4>
+      </div>
+      <div class="modal-body">
+
+      	<div class="form-group">
+	      <label for="gradeName">Plan Type<sup style="color:red">*</sup></label>
+	      <input type="text"  class="form-control" id="ee_plan_type">
+	    </div>
+	    <div id="ee_selectID" style="display: none"></div>
+
+
+	   
+
+		<div class="form-group">
+		<button type="button" class="btn btn-primary" id="add_details">Submit</button>
+		</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="refresh">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<button class="open-button" onclick="openForm()" style="display: none;">Chat</button>
+
+
+<script type="text/javascript">
+var log = $('#voyage_details').html();
+console.log(log)
+$.ajax({
+  url: '/audit/internet_recharge/',
+  dataType: 'json',
+  type: 'get',
+  data:
+  { 
+  	'log' : log,
+  },
+  success : function(obj){	      	
+   
+  },
+  error : function(){
+
+  }
+});
+
+
+
+$(".edit_info").click(function(){
+	var c_id        	 = $(this).closest("tr").find(".c_id").text();
+	var c_follow_up 	 = $(this).closest("tr").find(".c_follow_up").text();
+	var c_plan_name 	 = $(this).closest("tr").find(".c_plan_name").text();
+	var c_alert_status   = $(this).closest("tr").find(".c_alert_status").text();
+	var c_pay_status 	 = $(this).closest("tr").find(".c_pay_status").text();
+	var c_amount  	     = $(this).closest("tr").find(".c_amount").text();
+	var c_remarks  	     = $(this).closest("tr").find(".c_remarks").text();
+	var c_status         = $(this).closest("tr").find(".c_statuss").text();
+
+	get_user_details(c_id,c_follow_up,c_plan_name,c_alert_status,c_pay_status,c_amount,c_remarks,c_status);
+  
+});
+
+function get_user_details(c_id,c_follow_up,c_plan_name,c_alert_status,c_pay_status,c_amount,c_remark,c_status){
+	$('#ee_selectID').val(c_id);
+	$('#ee_follow_up').val(c_follow_up);
+	$('#ee_c_pay_status').val(c_pay_status);
+	$('#ex_amount').val(c_amount);	
+	var formattedString = c_remark.split(",").join("\n")
+	$('#ex_remarks').val(formattedString);	
+	$('#ex_status').val(c_status);
+}
+
+$('#update_details').click(function(){
+
+	var x_id 			= $('#ee_selectID').val();
+	var x_remind_date 	= $('#ee_follow_up').val();
+	var get_remind_date = $('#ee_follow_up').val();
+	var ex_amount 		= $('#ex_amount').val();
+	var ex_remarks 		= $('#ex_remarks').val();
+	var ex_statuss 	 	= $('#ex_status').val();
+
+  	$.ajax({
+	      url: '/audit/update_remind_entry/',
+	      dataType: 'JSON',
+	      type: 'GET',
+	      data:
+	      { 
+	     	'selected_id'		: JSON.stringify(x_id),
+			'get_remind_date'	: JSON.stringify(x_remind_date),	
+			'ex_amount'			: JSON.stringify(ex_amount),
+			'ex_remarks'		: JSON.stringify(ex_remarks),	
+			'ex_statuss' 		: JSON.stringify(ex_statuss),	
+	      },
+
+	      success : function(obj){ 
+	        if(obj=='done'){
+	        	alert('Successfully updated');
+	        	}
+	        	location.reload();
+	      },
+	      error : function(err){
+	        console.log(JSON.stringify(err,null,4));
+	      }        
+	    });
+	})
+
+
+$('#submit_details').click(function(){
+	var ee_recharge 		= $('#ee_recharge').val();
+	var get_plan_details 	= $('#get_plan_details').val();
+	var ee_items 			= $('#ee_items').val();
+	var ee_amount 			= $('#ee_amount').val();
+	$.ajax({
+      url: '/audit/insert_remind_entry/',
+      dataType: 'JSON',
+      type: 'GET',
+      data:
+      {      	
+		'ee_recharge' 		: JSON.stringify(ee_recharge),
+		'get_plan_details' 	: JSON.stringify(get_plan_details),
+		'ee_items' 			: JSON.stringify(ee_items),
+		'ee_amount'		 	: JSON.stringify(ee_amount),
+      },
+
+      success : function(obj){ 
+        if(obj=='done'){
+        	alert('Successfully submitted');
+        }
+         if(obj=='plz'){
+        	alert('You can update of this details');
+        }
+
+        location.reload();
+      },
+      error : function(err){
+        console.log(JSON.stringify(err,null,4));
+      }        
+    });	
+
+})
+
+$('#add_details').click(function(){
+	var ee_plan_type = $('#ee_plan_type').val();
+	
+	$.ajax({
+      url: '/audit/add_plan_entry/',
+      dataType: 'JSON',
+      type: 'GET',
+      data:
+      {      	
+		'ee_plan_type' 	: JSON.stringify(ee_plan_type),		
+      },
+
+      success : function(obj){ 
+        if(obj=='done'){
+        	alert('Successfully added');
+        }
+        
+        location.reload();
+      },
+      error : function(err){
+        console.log(JSON.stringify(err,null,4));
+      }        
+    });	
+
+})
+
+
+$('.delete_info').click(function(){
+	var delete_id = $(this).attr('id');
+	var result = confirm("Want to Remove?");
+    if (result==true)
+    {
+        var result2 = confirm("Want to Remove?");
+        if (result2==true)
+        {
+		$.ajax({
+	      url: '/audit/delete_entry/',
+	      dataType: 'JSON',
+	      type: 'GET',
+	      data:
+	      {      	
+			'delete_id' : JSON.stringify(delete_id),		
+	      },
+
+	      success : function(obj){ 
+	        if(obj=='done'){
+	        	alert('Successfully deleted');
+	        }
+	        
+	        location.reload();
+	      },
+	      error : function(err){
+	        console.log(JSON.stringify(err,null,4));
+	      }        
+	    });	
+	}
+}
+})
+
+</script>
+
+<script>
+function openForm() {
+  document.getElementById("myForm").style.display = "block";
+}
+
+function closeForm() {
+  document.getElementById("myForm").style.display = "none";
+}
+</script>
+
+{% endblock %}

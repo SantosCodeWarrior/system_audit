@@ -1,0 +1,492 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style type="text/css">
+	textarea {
+   resize: none;
+}
+
+th {
+  height: 20px;
+}
+</style>
+
+ <div class="card">
+    <div class="card-body">
+		<div class="col-md-12">   
+			<h3 id="header"><center>System Entry</center></h3>	
+			<div class="container">
+			    <div class="row">
+			        <div class="col-md-10">
+					    <div class="input-group">
+					      <span class="input-group-addon" style="width:20%;font-size: 12px" >System Name</span>
+					      <input id="e_user_name" type="text" class="form-control col-md-9" onkeydown="upperCaseF(this)">
+					    </div>
+
+					    <div class="input-group">
+					      <span class="input-group-addon" style="width:20%;font-size: 12px">Processor</span>
+					      <input id="e_processor" type="text" class="form-control col-md-9">
+					    </div> 
+
+					    <div class="input-group">
+					      <span class="input-group-addon" style="width:20%;font-size: 12px">RAM</span>			    
+					      <input id="e_ram" type="text" class="form-control col-md-9" onkeydown="upperCaseF(this)">
+					    </div>  
+
+					    <div class="input-group">
+					      <span class="input-group-addon" style="width:20%;font-size: 12px">HDD/SSD</span>			    
+					      <input id="e_hdd" type="text" class="form-control col-md-9" onkeydown="upperCaseF(this)">
+					    </div> 
+
+					    <div class="input-group">
+					      <span class="input-group-addon" style="width:20%;font-size: 12px">Operating System</span>
+					      <input id="e_operating_system" type="email" class="form-control col-md-9">
+					    </div> 					    
+
+					     <!-- <div class="input-group">
+					      <span class="input-group-addon" style="width:20%">Bill</span>
+					      <input id="e_operating_system" type="email" class="form-control col-md-9">
+					    </div>  -->
+					    <div class="input-group">
+					      <span class="input-group-addon" style="width:20%;font-size: 12px"></span>
+					      <select class="form-control col-md-3" id="computer_details">
+					      <option value="0"></option>
+					      <option value="Laptop">Laptop</option>
+					      <option value="Desktop">Desktop</option>
+					      <option value="Headphone">Headphone</option>
+					      <option value="Pen Drive">Pen Drive</option>
+					      <option value="DP Machine">DP Machine</option>
+					      <option value="Printer">Printer</option>
+					      <option value="Server">Server</option>					      			      
+					      <option value="Portable Hard Disk">Portable Hard Disk</option>                                
+	                      <option value="Switch">Switch</option>
+	                      <option value="Router">Router</option>
+	                      <option value="Camera">Camera</option>
+	                      <option value="CCTV">CCTV</option>
+	                      <option value="Reception">Reception</option>
+	                      <option value="Smart Desktop">Smart Desktop</option>
+	                      <option value="Other">Other</option>
+					      </select>
+					    </div> 
+
+					    <div class="input-group" style="display: none;" id="headphone_key_num">
+					      <span class="input-group-addon" style="width:20%;font-size: 12px"></span>
+					      <select class="form-control col-md-3" id="headphone_key" style='margin-top: -34px;margin-left: 200px;'>
+					      <option value="0"></option>
+					      {% for t in hp_array %}
+					      	<option id="{{t.id}}">{{t.num}}</option>
+					     {% endfor %}					    
+					      </select>
+					      <div id="stock_details" style="color:red;font-weight: bold;margin-top: 8px;"></div>
+					    </div>
+
+					    <div class="input-group">
+					      <span class="input-group-addon" style="width:20%;font-size: 12px">Remarks</span>
+					       <textarea id="e_remark" rows="4" cols="60"></textarea>
+					    </div> 
+
+					    <!-- <div class="input-group">
+					      <span class="input-group-addon" style="width:20%;font-size: 12px">Serial No</span>
+					       <input type="file" id="myfile" name="myfile">
+					    </div>  -->
+					    <p></p>
+					    <div class="container" style="margin-left: 155px;">
+						    <div class="row">
+						        <div class="col-xs-6">
+						            <button class="btn btn-success col-md-12" id="submit_user">Submit</button>
+						        </div>&nbsp;
+						        <div class="col-xs-6">
+
+						            
+						        </div>
+						    </div>
+						</div>						
+			        </div>	       
+			    </div>
+			</div>	
+		</div>
+		<button class="btn btn-warning" id="export_sys" style="float: right;">EXPORT</button>
+	</div>
+
+
+
+
+    <div class="card-body">
+		<div class="col-md-12">
+		    <div class="box-header">
+		      <h3 class="box-title">System Master </h3>
+		    </div>
+		    <div class="box-body">
+		      <table  class="table table-striped table-bordered" id="user_details">
+		        <thead style="font-size: 9px;color: black;white-space: nowrap;">
+		          <tr>
+		            <th></th>		           
+		            <th>S.No</th>
+		            <th style="display: none"></th>
+		            <th>System Name</th>
+		            <th>Processor</th>
+		            <th>RAM</th>
+		            <th>HDD</th>
+		            <th>KEYBOARD</th>
+		            <th>MOUSE</th>
+		            <th>MONITOR</th>
+		            <th>UPS</th>
+		            <th>Operating System</th>
+		            <th>Computer Types</th>
+		            <th>Headphone</th>
+		            <th>Remarks</th>
+		            <th>Location</th>
+		            <th>Assigned to ?</th>
+		          </tr>
+		        </thead>
+		        <tbody style="font-size: 9px;color: black">
+		        	{% for x in user_array %}
+		        	<tr style="padding-left:5px;">
+					<td><button class="edit btn btn-success edit_info" data-toggle="modal" data-target="#myModal" style="font-size: 9px">Edit</button></td>
+		        	<td>{{forloop.counter}}</td>
+		        	<td class="id" style="display: none">{{x.id}}</td>
+		        	<td class="user_name" style="white-space: nowrap;">{{x.user_name}}</td>
+					<td class="processor" style="white-space: nowrap;">{{x.processor}}</td>
+					<td class="ram" style="white-space: nowrap;">{{x.ram}}</td>
+					<td class="hdd" style="white-space: nowrap;">{{x.hdd}}</td>
+					<td class="keyboard" style="white-space: nowrap;">{{x.keyboard|default_if_none:""}}</td>
+					<td class="mouse" style="white-space: nowrap;">{{x.mouse|default_if_none:""}}</td>
+					<td class="monitor" style="white-space: nowrap;">{{x.monitor|default_if_none:""}}</td>
+					<td class="smps" style="white-space: nowrap;">{{x.smps|default_if_none:""}}</td>
+					<td class="operating_sys" style="white-space: nowrap;">{{x.operating_sys}}</td>
+					<td class="computer_types" style="text-transform: capitalize;">{{x.items}}</td>
+					<td class="headphone_key_details"  style="white-space: nowrap;">{{x.other_items}}</td>
+					<td class="remark">{{x.remark}}</td>
+					<td class="location" style="white-space: nowrap;">{{x.location}}</td>
+					<td class="assgined_to" style="white-space: nowrap;">{{x.get_assigned|default_if_none:""}}</td>
+		        	{% endfor %}
+		        	</tr>
+		        </tbody>		        
+		      </table>
+		    </div>
+		</div>
+	</div>
+</div>
+
+
+
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+   
+    <div class="modal-content">
+      <div class="modal-header">
+
+       
+        <h4 class="modal-title">User's System Information</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+	      <label for="gradeName">User Name</label>
+	      <input type="text"  class="form-control" id="ee_user_name">
+	    </div>
+
+	    <div class="form-group">
+	      <label for="gradeName">Processor</label>
+	      <input type="text"  class="form-control" id="ee_processor">
+	    </div>
+
+	      <div class="form-group">
+	      <label for="gradeName">RAM</label>
+	      <input type="text"  class="form-control" id="ee_ram">
+	    </div>
+
+	      <div class="form-group">
+	      <label for="gradeName">HDD</label>
+	      <input type="text"  class="form-control" id="ee_hdd">
+	    </div>
+
+	      <div class="form-group">
+	      <label for="gradeName">KEYBOARD</label>
+	      <input type="text"  class="form-control" id="ee_keyboard">
+	    </div>
+
+	      <div class="form-group">
+	      <label for="gradeName">MOUSE</label>
+	      <input type="text"  class="form-control" id="ee_mouse">
+	    </div>
+
+	     <div class="form-group">
+	      <label for="gradeName">MONITOR</label>
+	      <input type="text"  class="form-control" id="ee_monitor">
+	    </div>
+
+	      <div class="form-group">
+	      <label for="gradeName">UPS</label>
+	      <input type="text"  class="form-control" id="ee_smps">
+	    </div>
+
+	    <div class="form-group">
+	      <label for="gradeName">Operating System</label>
+	      <input type="text"  class="form-control" id="ee_operating_sys">
+	    </div>
+
+	    <div class="form-group">
+	      <label for="gradeName">Computer types</label>
+	      <select class="form-control" id="ee_computer_types">
+	      	<option value="0"></option>
+			<option value="Laptop">Laptop</option>
+			<option value="Desktop">Desktop</option>
+			<option value="Headphone">Headphone</option>
+			<option value="Printer">Printer</option>
+			<option value="Reception">Reception</option>
+			<option value="Pen Drive">Pen Drive</option>
+			<option value="Portable Hard Disk">Portable Hard Disk</option>
+			<option value="Switch">Switch</option>
+            <option value="Router">Router</option>
+            <option value="Camera">Camera</option>
+            <option value="CCTV">CCTV</option>
+            <option value="Smart Desktop">Smart Desktop</option>
+	      </select>
+	    </div>
+
+	    <div class="form-group">
+	      <label for="gradeName">Headphone Serial Number</label>
+	      <select class="form-control" id="ee_headphone_key">
+	      <!-- 	<option value="0"></option> -->
+			{% for v in hp_array %}
+				<option value="{{v.num}}">{{v.num}}</option>
+			{% endfor %}
+	      </select>
+	    </div>
+
+	    <div class="form-group">
+	      <label for="gradeName">Depart Name</label>
+	      <input type="text"  class="form-control" id="ee_depart_name">
+	    </div>
+
+	     <div class="form-group">
+	      <label for="gradeName">Assigned to ?</label>
+	      <textarea type="text"  class="form-control" id="ee_assigned_to"></textarea>
+	    </div>
+
+	    <div class="form-group">
+	      <label for="gradeName">Remarks</label>
+	      <textarea id="ee_remarks" rows="2" cols="52"></textarea>
+	    </div>
+
+	    <div id="ee_selectID" style="display: none"></div>
+
+
+	   
+
+		<div class="form-group">
+		<button type="button" class="btn btn-primary" id="update_details">Update</button>
+		</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="refresh">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<script type="text/javascript">
+
+$('#computer_details').change(function(){
+	var cl = $(this).val();		
+	//if(cl=='Headphone'){		
+		$('#headphone_key_num').css('display','');
+		//$('#stock_details').text("Available Stock "+'{{hp_array.0.stock}}');
+	//}else{
+	//	$('#headphone_key_num').css('display','none');
+	//}
+})
+
+	$('#submit_user').click(function(){
+	var user 	  		 = $('#e_user_name').val();
+	var processor 		 = $('#e_processor').val();
+	var ram 	  		 = $('#e_ram').val();
+	var hdd 	  		 = $('#e_hdd').val();
+	var ope_sys   		 = $('#e_operating_system').val();
+	var remark    		 = $('#e_remark').val();	
+	var computer_details = $('#computer_details').val();
+	var headphone_key    = $('#headphone_key').val();	
+
+	if(user==''){
+		alert("Please fill up");
+		return;
+	}
+
+		$.ajax({
+	      url: '/audit/submit_entry/',
+	      dataType: 'JSON',
+	      type: 'GET',
+	      data:
+	      {  
+	        'user'             : user,
+	        'processor'        : processor,
+	        'ram'              : ram,
+	        'hdd'              : hdd,
+	        'ope_sys'          : ope_sys,
+	        'remark'           : remark,	      
+	        'headphone_key'    : headphone_key,
+	        'computer_details' : computer_details,
+	      },
+	      success : function(obj){
+	      	
+	        if(obj=='done'){
+	        	alert('Done');
+	        	$('#e_user_name').val('');
+	        	location.reload();
+	        }if(obj=='already'){
+	        	alert('Already updated.');
+	        	$('#e_user_name').val('');
+	        	location.reload();
+	        }
+	      },
+	      error : function(err){
+	        console.log(JSON.stringify(err,null,4));
+	      }        
+	    });
+	  });
+
+
+	function upperCaseF(a){
+    setTimeout(function(){
+        a.value = a.value.toUpperCase();
+    }, 1);
+}
+
+$(".edit_info").click(function() {	
+  var id        	 = $(this).closest("tr").find(".id").text();
+  var user_name 	 = $(this).closest("tr").find(".user_name").text();
+  var processor 	 = $(this).closest("tr").find(".processor").text();
+  var ram 			 = $(this).closest("tr").find(".ram").text();
+  var hdd 			 = $(this).closest("tr").find(".hdd").text();
+  var keyboard  	 = $(this).closest("tr").find(".keyboard").text();
+  var mouse 	 	 = $(this).closest("tr").find(".mouse").text();
+  var monitor 		 = $(this).closest("tr").find(".monitor").text();
+  var smps 			 = $(this).closest("tr").find(".smps").text();
+  var operating_sys  = $(this).closest("tr").find(".operating_sys").text();
+  var remark 		 = $(this).closest("tr").find(".remark").text();  
+  var computer_types = $(this).closest("tr").find(".computer_types").text();  
+  var headphone_key  = $(this).closest("tr").find(".headphone_key_details").text();  
+  var depart_name 	 = $(this).closest("tr").find(".location").text();  
+  var assigned_to 	 = $(this).closest("tr").find(".assgined_to").text();  
+
+  get_user_details(id,user_name,processor,ram,hdd,keyboard,mouse,monitor,smps,operating_sys,remark,computer_types,headphone_key,depart_name,assigned_to);
+  
+});
+
+
+function  get_user_details(id,user_name,processor,ram,hdd,keyboard,mouse,monitor,smps,operating_sys,remark,computer_types,headphone_key,depart_name,assigned_to) {
+	
+	selected_id = id;
+	$("#ee_selectID").val(selected_id);
+	$("#ee_user_name").val(user_name);	
+	$("#ee_processor").val(processor);
+	$('#ee_ram').val(ram);
+	$('#ee_hdd').val(hdd);
+	$('#ee_keyboard').val(keyboard);
+	$('#ee_mouse').val(mouse);
+	$('#ee_monitor').val(monitor);
+	$('#ee_smps').val(smps);
+  	$('#ee_operating_sys').val(operating_sys);
+  	$('#ee_remarks').val(remark);
+  	$('#ee_computer_types').val(computer_types);
+  	$('#ee_headphone_key').val(headphone_key);
+  	$('#ee_depart_name').val(depart_name);  	
+  	$('#ee_assigned_to').val(assigned_to);
+  }
+
+  	$('#ee_hdd').css('text-transform','uppercase');
+	$('#ee_keyboard').css('text-transform','uppercase');
+	$('#ee_mouse').css('text-transform','uppercase');
+	$('#ee_monitor').css('text-transform','uppercase');
+	$('#ee_smps').css('text-transform','uppercase');
+	$('#ee_assigned_to').css('text-transform','uppercase');
+
+
+$('#update_details').click(function(){
+	var ex_selectID      = $("#ee_selectID").val();
+  	var ex_user_name     = $("#ee_user_name").val();
+	var ex_processor     = $("#ee_processor").val();
+	var ex_ram   	     = $('#ee_ram').val();
+	var ex_hdd 			 = $('#ee_hdd').val();
+	var ex_keyboard      = $('#ee_keyboard').val();
+	var ex_mouse         = $('#ee_mouse').val();
+	var ex_monitor       = $('#ee_monitor').val();
+	var ex_smps          = $('#ee_smps').val();
+	var ex_operating_sys = $('#ee_operating_sys').val();
+	var ex_remarks       = $('#ee_remarks').val();
+	var ex_items_types   = $('#ee_computer_types').val();
+	var ex_headphone_key = $('#ee_headphone_key').val();
+	var ex_depart_name 	 = $('#ee_depart_name').val();
+	var ex_assigned_to   = $('#ee_assigned_to').val();
+	
+  	$.ajax({
+      url: '/audit/update_user_entry/',
+	  dataType: 'JSON',
+      type: 'GET',
+      data:
+      { 
+     	'selectID'		: JSON.stringify(ex_selectID),
+		'user'			: JSON.stringify(ex_user_name),
+		'processor'		: JSON.stringify(ex_processor),
+		'ram'			: JSON.stringify(ex_ram),
+		'hdd'			: JSON.stringify(ex_hdd),
+		'keyboard'	    : JSON.stringify(ex_keyboard),
+		'mouse'			: JSON.stringify(ex_mouse),
+		'monitor'		: JSON.stringify(ex_monitor),
+		'smps'			: JSON.stringify(ex_smps),
+		'ope_sys'		: JSON.stringify(ex_operating_sys),
+		'remark'		: JSON.stringify(ex_remarks),
+		'items_types'   : JSON.stringify(ex_items_types),
+		'headphone_key' : JSON.stringify(ex_headphone_key),
+		'depart_name'   : JSON.stringify(ex_depart_name),
+		'assigned_toz'	: JSON.stringify(ex_assigned_to),
+      },
+      success : function(obj){ 
+        if(obj=='done'){
+        	alert('Successfully updated.');
+        	}
+        	location.reload();
+      },
+      error : function(err){
+        console.log(JSON.stringify(err,null,4));
+      }        
+    });
+})
+
+
+
+function load_xlsx(){
+ $("#loaders").css('display','');
+   var user_details = $('#user_details').tableToJSON();
+   //console.log(user_details)
+   
+    $.ajax({
+      url      : "/audit/export_system_details/",
+      type     : 'POST',
+      dataType : 'JSON',
+      data :
+      {
+        'user_details' : JSON.stringify(user_details),
+        
+      },
+      success:function(obj){
+        $("#loaders").css('display','none');
+        location.href = "/audit/system_export/";
+      },
+      error:function(err){
+        alert(JSON.stringify(err,null,4));
+      }
+  });
+}
+
+$('#export_sys').click(function(){   
+    load_xlsx();
+})
+
+</script>
+
+
+{% endblock %}

@@ -1,0 +1,625 @@
+
+/* INSERT QUERY */
+INSERT INTO audit_weekly_entry(
+  boot_time, unused_program, temp_file, 
+  up_antivirus, history_clean, server_folder, 
+  internet_conn, printer_conn, issue_any, 
+  user_id, entry_date, head_phone, 
+  depart_name, email_configure, use_system, 
+  other_items, assigned_to
+) 
+VALUES 
+  (
+    '21 sec', 'No', 'YES', 'YES', 'YES', 
+    'YES', 'YES', 'No', '', 50, '2024-01-20', 
+    'No', '3rd Floor', 'Mail configuration due to new SSD 256 GB', 
+    'Operator', '', ''
+  );
+/* INSERT QUERY */
+INSERT INTO audit_weekly_entry(
+  boot_time, unused_program, temp_file, 
+  up_antivirus, history_clean, server_folder, 
+  internet_conn, printer_conn, issue_any, 
+  user_id, entry_date, head_phone, 
+  depart_name, email_configure, use_system, 
+  other_items, assigned_to
+) 
+VALUES 
+  (
+    '21 Sec', 'No', 'YES', 'YES', 'YES', 
+    'YES', 'YES', 'No', '', 60, '2024-01-20', 
+    'No', '3rd Floor', '156 GB', 'Operator', 
+    '', ''
+  );
+/* INSERT QUERY */
+INSERT INTO audit_weekly_entry(
+  boot_time, unused_program, temp_file, 
+  up_antivirus, history_clean, server_folder, 
+  internet_conn, printer_conn, issue_any, 
+  user_id, entry_date, head_phone, 
+  depart_name, email_configure, use_system, 
+  other_items, assigned_to
+) 
+VALUES 
+  (
+    '21 sec', 'No', 'YES', 'YES', 'YES', 
+    'YES', 'YES', 'No', '', 57, '2024-01-20', 
+    'No', '3rd Floor', '43.2 GB', 'Operator', 
+    '', ''
+  );
+/* INSERT QUERY */
+INSERT INTO audit_weekly_entry(
+  boot_time, unused_program, temp_file, 
+  up_antivirus, history_clean, server_folder, 
+  internet_conn, printer_conn, issue_any, 
+  user_id, entry_date, head_phone, 
+  depart_name, email_configure, use_system, 
+  other_items, assigned_to
+) 
+VALUES 
+  (
+    '20 sec', 'No', 'YES', 'YES', 'YES', 
+    'YES', 'YES', 'No', '', 49, '2024-01-20', 
+    'No', '3rd Floor', '151 GB', 'Operator', 
+    '', ''
+  );
+/* INSERT QUERY */
+INSERT INTO audit_weekly_entry(
+  boot_time, unused_program, temp_file, 
+  up_antivirus, history_clean, server_folder, 
+  internet_conn, printer_conn, issue_any, 
+  user_id, entry_date, head_phone, 
+  depart_name, email_configure, use_system, 
+  other_items, assigned_to
+) 
+VALUES 
+  (
+    '21 sec', 'No', 'YES', 'YES', 'YES', 
+    'YES', 'YES', 'No', '', 44, '2024-01-20', 
+    'No', '3rd Floor', '86.4 GB', 'Operator', 
+    '', ''
+  );
+/* INSERT QUERY */
+INSERT INTO audit_weekly_entry(
+  boot_time, unused_program, temp_file, 
+  up_antivirus, history_clean, server_folder, 
+  internet_conn, printer_conn, issue_any, 
+  user_id, entry_date, head_phone, 
+  depart_name, email_configure, use_system, 
+  other_items, assigned_to
+) 
+VALUES 
+  (
+    '21 sec', 'No', 'YES', 'YES', 'YES', 
+    'YES', 'YES', 'No', '', 45, '2024-01-20', 
+    'No', '3rd Floor', '91.9 GB', 'Operator', 
+    '', ''
+  );
+/* INSERT QUERY */
+INSERT INTO audit_weekly_entry(
+  boot_time, unused_program, temp_file, 
+  up_antivirus, history_clean, server_folder, 
+  internet_conn, printer_conn, issue_any, 
+  user_id, entry_date, head_phone, 
+  depart_name, email_configure, use_system, 
+  other_items, assigned_to
+) 
+VALUES 
+  (
+    '20 sec', 'No', 'YES', 'YES', 'YES', 
+    'YES', 'YES', 'No', '', 46, '2024-01-20', 
+    'No', '3rd Floor', '114 GB', 'Operator', 
+    '', ''
+  );
+/* INSERT QUERY */
+INSERT INTO audit_weekly_entry(
+  boot_time, unused_program, temp_file, 
+  up_antivirus, history_clean, server_folder, 
+  internet_conn, printer_conn, issue_any, 
+  user_id, entry_date, head_phone, 
+  depart_name, email_configure, use_system, 
+  other_items, assigned_to
+) 
+VALUES 
+  (
+    '23 sec', 'No', 'YES', 'YES', 'YES', 
+    'YES', 'YES', 'No', '', 47, '2024-01-20', 
+    'No', '3rd Floor', '134 GB', 'Operator', 
+    '', ''
+  );
+/* INSERT QUERY */
+INSERT INTO audit_weekly_entry(
+  boot_time, unused_program, temp_file, 
+  up_antivirus, history_clean, server_folder, 
+  internet_conn, printer_conn, issue_any, 
+  user_id, entry_date, head_phone, 
+  depart_name, email_configure, use_system, 
+  other_items, assigned_to
+) 
+VALUES 
+  (
+    '21 sec', 'No', 'YES', 'YES', 'YES', 
+    'YES', 'YES', 'No', '', 53, '2024-01-20', 
+    'No', '3rd Floor', '121 GB', 'Operator', 
+    '', ''
+  );
+/* INSERT QUERY */
+INSERT INTO audit_weekly_entry(
+  boot_time, unused_program, temp_file, 
+  up_antivirus, history_clean, server_folder, 
+  internet_conn, printer_conn, issue_any, 
+  user_id, entry_date, head_phone, 
+  depart_name, email_configure, use_system, 
+  other_items, assigned_to
+) 
+VALUES 
+  (
+    '21 sec', 'No', 'YES', 'YES', 'YES', 
+    'YES', 'YES', 'No', '', 54, '2024-01-20', 
+    'No', '3rd Floor', '91.3 GB', 'Operator', 
+    '', ''
+  );
+/* INSERT QUERY */
+INSERT INTO audit_weekly_entry(
+  boot_time, unused_program, temp_file, 
+  up_antivirus, history_clean, server_folder, 
+  internet_conn, printer_conn, issue_any, 
+  user_id, entry_date, head_phone, 
+  depart_name, email_configure, use_system, 
+  other_items, assigned_to
+) 
+VALUES 
+  (
+    '21 sec', 'No', 'YES', 'YES', 'YES', 
+    'YES', 'YES', 'No', '', 59, '2024-01-20', 
+    'No', '3rd Floor', '111 GB', 'Operator', 
+    '', ''
+  );
+/* INSERT QUERY */
+INSERT INTO audit_weekly_entry(
+  boot_time, unused_program, temp_file, 
+  up_antivirus, history_clean, server_folder, 
+  internet_conn, printer_conn, issue_any, 
+  user_id, entry_date, head_phone, 
+  depart_name, email_configure, use_system, 
+  other_items, assigned_to
+) 
+VALUES 
+  (
+    '21 sec', 'No', 'YES', 'YES', 'YES', 
+    'YES', 'YES', 'No', '', 51, '2024-01-20', 
+    'No', '3rd Floor', '122 GB', 'Operator', 
+    '', ''
+  );
+/* INSERT QUERY */
+INSERT INTO audit_weekly_entry(
+  boot_time, unused_program, temp_file, 
+  up_antivirus, history_clean, server_folder, 
+  internet_conn, printer_conn, issue_any, 
+  user_id, entry_date, head_phone, 
+  depart_name, email_configure, use_system, 
+  other_items, assigned_to
+) 
+VALUES 
+  (
+    '21 sec', 'No', 'YES', 'YES', 'YES', 
+    'YES', 'YES', 'No', '', 58, '2024-01-20', 
+    'No', '3rd Floor', '142 GB', 'Operator', 
+    '', ''
+  );
+/* INSERT QUERY */
+INSERT INTO audit_weekly_entry(
+  boot_time, unused_program, temp_file, 
+  up_antivirus, history_clean, server_folder, 
+  internet_conn, printer_conn, issue_any, 
+  user_id, entry_date, head_phone, 
+  depart_name, email_configure, use_system, 
+  other_items, assigned_to
+) 
+VALUES 
+  (
+    '20 sec', 'No', 'YES', 'YES', 'YES', 
+    'YES', 'YES', 'No', '', 52, '2024-01-20', 
+    'No', '3rd Floor', '120 GB', 'Operator', 
+    '', ''
+  );
+/* INSERT QUERY */
+INSERT INTO audit_weekly_entry(
+  boot_time, unused_program, temp_file, 
+  up_antivirus, history_clean, server_folder, 
+  internet_conn, printer_conn, issue_any, 
+  user_id, entry_date, head_phone, 
+  depart_name, email_configure, use_system, 
+  other_items, assigned_to
+) 
+VALUES 
+  (
+    '21 sec', 'No', 'YES', 'YES', 'YES', 
+    'YES', 'YES', 'No', '', 56, '2024-01-20', 
+    'No', '3rd Floor', '126 GB', 'Operator', 
+    '', ''
+  );
+/* INSERT QUERY */
+INSERT INTO audit_weekly_entry(
+  boot_time, unused_program, temp_file, 
+  up_antivirus, history_clean, server_folder, 
+  internet_conn, printer_conn, issue_any, 
+  user_id, entry_date, head_phone, 
+  depart_name, email_configure, use_system, 
+  other_items, assigned_to
+) 
+VALUES 
+  (
+    '23 sec', 'No', 'YES', 'YES', 'YES', 
+    'YES', 'YES', 'No', '', 95, '2024-01-20', 
+    'No', '3rd Floor', '32.6 GB', 'Team Leader', 
+    '', ''
+  );
+/* INSERT QUERY */
+INSERT INTO audit_weekly_entry(
+  boot_time, unused_program, temp_file, 
+  up_antivirus, history_clean, server_folder, 
+  internet_conn, printer_conn, issue_any, 
+  user_id, entry_date, head_phone, 
+  depart_name, email_configure, use_system, 
+  other_items, assigned_to
+) 
+VALUES 
+  (
+    '21 sec', 'No', 'YES', 'YES', 'YES', 
+    'YES', 'YES', 'No', '', 96, '2024-01-20', 
+    'No', '3rd Floor', '39.6 GB', 'Team Leader', 
+    '', ''
+  );
+/* INSERT QUERY */
+INSERT INTO audit_weekly_entry(
+  boot_time, unused_program, temp_file, 
+  up_antivirus, history_clean, server_folder, 
+  internet_conn, printer_conn, issue_any, 
+  user_id, entry_date, head_phone, 
+  depart_name, email_configure, use_system, 
+  other_items, assigned_to
+) 
+VALUES 
+  (
+    '21 sec', 'No', 'YES', 'YES', 'YES', 
+    'YES', 'YES', 'No', '', 92, '2024-01-20', 
+    'No', '3rd Floor', '45 GB', 'Master', 
+    '', ''
+  );
+/* INSERT QUERY */
+INSERT INTO audit_weekly_entry(
+  boot_time, unused_program, temp_file, 
+  up_antivirus, history_clean, server_folder, 
+  internet_conn, printer_conn, issue_any, 
+  user_id, entry_date, head_phone, 
+  depart_name, email_configure, use_system, 
+  other_items, assigned_to
+) 
+VALUES 
+  (
+    '21 sec', 'No', 'YES', 'YES', 'YES', 
+    'YES', 'YES', 'No', '', 83, '2024-01-20', 
+    'No', '3rd Floor', '116 GB', 'Team Leader', 
+    '', ''
+  );
+/* INSERT QUERY */
+INSERT INTO audit_weekly_entry(
+  boot_time, unused_program, temp_file, 
+  up_antivirus, history_clean, server_folder, 
+  internet_conn, printer_conn, issue_any, 
+  user_id, entry_date, head_phone, 
+  depart_name, email_configure, use_system, 
+  other_items, assigned_to
+) 
+VALUES 
+  (
+    '24 sec', 'No', 'YES', 'YES', 'YES', 
+    'YES', 'YES', 'No', 'No', 102, '2024-01-20', 
+    'No', '2nd Floor', 'Size 134 Gb', 
+    'Operator', '', 'NO'
+  );
+/* INSERT QUERY */
+INSERT INTO audit_weekly_entry(
+  boot_time, unused_program, temp_file, 
+  up_antivirus, history_clean, server_folder, 
+  internet_conn, printer_conn, issue_any, 
+  user_id, entry_date, head_phone, 
+  depart_name, email_configure, use_system, 
+  other_items, assigned_to
+) 
+VALUES 
+  (
+    '21 Sec', 'No', 'YES', 'YES', 'YES', 
+    'YES', 'YES', 'No', 'No', 17, '2024-01-20', 
+    'No', '2nd Floor', 'Size 31.8 GB', 
+    'Operator', '', 'No'
+  );
+/* INSERT QUERY */
+INSERT INTO audit_weekly_entry(
+  boot_time, unused_program, temp_file, 
+  up_antivirus, history_clean, server_folder, 
+  internet_conn, printer_conn, issue_any, 
+  user_id, entry_date, head_phone, 
+  depart_name, email_configure, use_system, 
+  other_items, assigned_to
+) 
+VALUES 
+  (
+    '21 sec', 'No', 'YES', 'YES', 'YES', 
+    'YES', 'YES', 'No', 'No', 105, '2024-01-20', 
+    'No', '2nd Floor', 'Size 59.8 Gb', 
+    'Operator', '', 'NO'
+  );
+/* INSERT QUERY */
+INSERT INTO audit_weekly_entry(
+  boot_time, unused_program, temp_file, 
+  up_antivirus, history_clean, server_folder, 
+  internet_conn, printer_conn, issue_any, 
+  user_id, entry_date, head_phone, 
+  depart_name, email_configure, use_system, 
+  other_items, assigned_to
+) 
+VALUES 
+  (
+    '21 sec', 'No', 'YES', 'YES', 'YES', 
+    'YES', 'YES', 'No', 'No', 98, '2024-01-20', 
+    'No', '2nd Floor', 'Size 78.7 Gb', 
+    'Operator', '', 'NO'
+  );
+/* INSERT QUERY */
+INSERT INTO audit_weekly_entry(
+  boot_time, unused_program, temp_file, 
+  up_antivirus, history_clean, server_folder, 
+  internet_conn, printer_conn, issue_any, 
+  user_id, entry_date, head_phone, 
+  depart_name, email_configure, use_system, 
+  other_items, assigned_to
+) 
+VALUES 
+  (
+    '19 Sec', 'No', 'YES', 'YES', 'YES', 
+    'YES', 'YES', 'No', 'No', 157, '2024-01-20', 
+    'No', '2nd Floor', 'Size 144 Gb', 
+    'Operator', '', 'No'
+  );
+/* INSERT QUERY */
+INSERT INTO audit_weekly_entry(
+  boot_time, unused_program, temp_file, 
+  up_antivirus, history_clean, server_folder, 
+  internet_conn, printer_conn, issue_any, 
+  user_id, entry_date, head_phone, 
+  depart_name, email_configure, use_system, 
+  other_items, assigned_to
+) 
+VALUES 
+  (
+    '24 sec', 'No', 'YES', 'YES', 'YES', 
+    'YES', 'YES', 'No', 'No', 112, '2024-01-20', 
+    'No', '2nd Floor', 'Size 131 Gb', 
+    'Operator', '', 'No'
+  );
+/* INSERT QUERY */
+INSERT INTO audit_weekly_entry(
+  boot_time, unused_program, temp_file, 
+  up_antivirus, history_clean, server_folder, 
+  internet_conn, printer_conn, issue_any, 
+  user_id, entry_date, head_phone, 
+  depart_name, email_configure, use_system, 
+  other_items, assigned_to
+) 
+VALUES 
+  (
+    '21 sec', 'No', 'YES', 'YES', 'YES', 
+    'YES', 'YES', 'No', 'No', 160, '2024-01-20', 
+    'No', '2nd Floor', 'Size 488 Bytes', 
+    'Operator', '', 'No'
+  );
+/* INSERT QUERY */
+INSERT INTO audit_weekly_entry(
+  boot_time, unused_program, temp_file, 
+  up_antivirus, history_clean, server_folder, 
+  internet_conn, printer_conn, issue_any, 
+  user_id, entry_date, head_phone, 
+  depart_name, email_configure, use_system, 
+  other_items, assigned_to
+) 
+VALUES 
+  (
+    '21 Sec', 'No', 'YES', 'YES', 'YES', 
+    'YES', 'YES', 'No', 'No', 66, '2024-01-20', 
+    'No', '2nd Floor', 'Size 468 Bytes', 
+    'Operator', '', 'No'
+  );
+/* INSERT QUERY */
+INSERT INTO audit_weekly_entry(
+  boot_time, unused_program, temp_file, 
+  up_antivirus, history_clean, server_folder, 
+  internet_conn, printer_conn, issue_any, 
+  user_id, entry_date, head_phone, 
+  depart_name, email_configure, use_system, 
+  other_items, assigned_to
+) 
+VALUES 
+  (
+    '24 sec', 'No', 'YES', 'YES', 'YES', 
+    'YES', 'YES', 'No', 'No', 103, '2024-01-20', 
+    'No', '2nd Floor', 'Size 44.9 Gb', 
+    'Operator', '', 'No'
+  );
+/* INSERT QUERY */
+INSERT INTO audit_weekly_entry(
+  boot_time, unused_program, temp_file, 
+  up_antivirus, history_clean, server_folder, 
+  internet_conn, printer_conn, issue_any, 
+  user_id, entry_date, head_phone, 
+  depart_name, email_configure, use_system, 
+  other_items, assigned_to
+) 
+VALUES 
+  (
+    '21 Sec', 'No', 'YES', 'YES', 'YES', 
+    'YES', 'YES', 'No', 'No', 159, '2024-01-20', 
+    'No', '2nd Floor', 'Size 19.2 Gb', 
+    'Operator', '', 'No'
+  );
+/* INSERT QUERY */
+INSERT INTO audit_weekly_entry(
+  boot_time, unused_program, temp_file, 
+  up_antivirus, history_clean, server_folder, 
+  internet_conn, printer_conn, issue_any, 
+  user_id, entry_date, head_phone, 
+  depart_name, email_configure, use_system, 
+  other_items, assigned_to
+) 
+VALUES 
+  (
+    '19 sec', 'No', 'YES', 'YES', 'YES', 
+    'YES', 'YES', 'No', 'No', 158, '2024-01-20', 
+    'No', '2nd Floor', 'Size 18.2 Gb', 
+    'Operator', '', 'No'
+  );
+/* INSERT QUERY */
+INSERT INTO audit_weekly_entry(
+  boot_time, unused_program, temp_file, 
+  up_antivirus, history_clean, server_folder, 
+  internet_conn, printer_conn, issue_any, 
+  user_id, entry_date, head_phone, 
+  depart_name, email_configure, use_system, 
+  other_items, assigned_to
+) 
+VALUES 
+  (
+    '21 sec', 'No', 'YES', 'YES', 'YES', 
+    'YES', 'YES', 'No', '', 75, '2024-01-20', 
+    'No', '4th Floor', '50.9 GB', 'Team Leader', 
+    '', ''
+  );
+/* INSERT QUERY */
+INSERT INTO audit_weekly_entry(
+  boot_time, unused_program, temp_file, 
+  up_antivirus, history_clean, server_folder, 
+  internet_conn, printer_conn, issue_any, 
+  user_id, entry_date, head_phone, 
+  depart_name, email_configure, use_system, 
+  other_items, assigned_to
+) 
+VALUES 
+  (
+    '23 sec', 'No', 'YES', 'YES', 'YES', 
+    'YES', 'YES', 'No', '', 82, '2024-01-20', 
+    'No', '4th Floor', '96.6 GB', 'Operator', 
+    '', ''
+  );
+/* INSERT QUERY */
+INSERT INTO audit_weekly_entry(
+  boot_time, unused_program, temp_file, 
+  up_antivirus, history_clean, server_folder, 
+  internet_conn, printer_conn, issue_any, 
+  user_id, entry_date, head_phone, 
+  depart_name, email_configure, use_system, 
+  other_items, assigned_to
+) 
+VALUES 
+  (
+    '21 sec', 'No', 'YES', 'YES', 'YES', 
+    'YES', 'YES', 'No', '', 73, '2024-01-20', 
+    'No', '4th Floor', '20.7 GB', 'Operator', 
+    '', ''
+  );
+/* INSERT QUERY */
+INSERT INTO audit_weekly_entry(
+  boot_time, unused_program, temp_file, 
+  up_antivirus, history_clean, server_folder, 
+  internet_conn, printer_conn, issue_any, 
+  user_id, entry_date, head_phone, 
+  depart_name, email_configure, use_system, 
+  other_items, assigned_to
+) 
+VALUES 
+  (
+    '20 sec', 'No', 'YES', 'YES', 'YES', 
+    'YES', 'YES', 'No', '', 165, '2024-01-20', 
+    'No', '4th Floor', '9.61 GB', 'Operator', 
+    '', ''
+  );
+/* INSERT QUERY */
+INSERT INTO audit_weekly_entry(
+  boot_time, unused_program, temp_file, 
+  up_antivirus, history_clean, server_folder, 
+  internet_conn, printer_conn, issue_any, 
+  user_id, entry_date, head_phone, 
+  depart_name, email_configure, use_system, 
+  other_items, assigned_to
+) 
+VALUES 
+  (
+    '24 sec', 'No', 'YES', 'YES', 'YES', 
+    'YES', 'YES', 'No', '', 164, '2024-01-20', 
+    'No', '4th Floor', '21.6 GB', 'Operator', 
+    '', ''
+  );
+/* INSERT QUERY */
+INSERT INTO audit_weekly_entry(
+  boot_time, unused_program, temp_file, 
+  up_antivirus, history_clean, server_folder, 
+  internet_conn, printer_conn, issue_any, 
+  user_id, entry_date, head_phone, 
+  depart_name, email_configure, use_system, 
+  other_items, assigned_to
+) 
+VALUES 
+  (
+    '24 sec', 'No', 'YES', 'YES', 'YES', 
+    'YES', 'YES', 'No', '', 167, '2024-01-20', 
+    'No', '4th Floor', '6.82 GB', 'Operator', 
+    '', ''
+  );
+/* INSERT QUERY */
+INSERT INTO audit_weekly_entry(
+  boot_time, unused_program, temp_file, 
+  up_antivirus, history_clean, server_folder, 
+  internet_conn, printer_conn, issue_any, 
+  user_id, entry_date, head_phone, 
+  depart_name, email_configure, use_system, 
+  other_items, assigned_to
+) 
+VALUES 
+  (
+    '21 sec', 'No', 'YES', 'YES', 'YES', 
+    'YES', 'YES', 'No', '', 74, '2024-01-20', 
+    'No', '4th Floor', '22.4 GB', 'Operator', 
+    '', 'Simran Negi'
+  );
+/* INSERT QUERY */
+INSERT INTO audit_weekly_entry(
+  boot_time, unused_program, temp_file, 
+  up_antivirus, history_clean, server_folder, 
+  internet_conn, printer_conn, issue_any, 
+  user_id, entry_date, head_phone, 
+  depart_name, email_configure, use_system, 
+  other_items, assigned_to
+) 
+VALUES 
+  (
+    '3 min', 'No', 'No', 'No', 'No', 'YES', 
+    'YES', 'No', '', 166, '2024-01-20', 
+    'No', '3rd Floor', 'Server', 'Server', 
+    '', 'Server'
+  );
+/* INSERT QUERY */
+INSERT INTO audit_weekly_entry(
+  boot_time, unused_program, temp_file, 
+  up_antivirus, history_clean, server_folder, 
+  internet_conn, printer_conn, issue_any, 
+  user_id, entry_date, head_phone, 
+  depart_name, email_configure, use_system, 
+  other_items, assigned_to
+) 
+VALUES 
+  (
+    '24 sec', 'No', 'YES', 'YES', 'YES', 
+    'YES', 'YES', 'No', '', 36, '2024-01-20', 
+    'No', '4th Floor', '31.5 GB', 'Operator', 
+    '', ''
+  );

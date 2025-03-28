@@ -1,0 +1,301 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style type="text/css">
+	textarea {
+   resize: none;
+}
+</style>
+
+ <div class="card">
+    <div class="card-body">
+		<div class="col-md-12">   
+			<h3 id="header"><center>System Maintenance Register</center></h3>	
+			<div class="container">
+			    <div class="row">
+			        <div class="col-md-10">	
+					     <div class="input-group">
+					      <span class="input-group-addon" style="width:30%">User Name</span>
+					   	  <select class="form-control" id="e_user_name">
+                                 <option id="0">Select User Name</option>
+                                {% for x in user_details %}
+                                <option id="{{x.user_id}}">{{x.user_name}}</option>
+                                {% endfor %}
+                            </select>
+					    </div> 
+
+					    <div class="input-group">
+					      <span class="input-group-addon" style="width:30%">Party's Name</span>
+					      <input id="e_party_name" type="text" class="form-control col-md-9">
+					    </div> 	
+
+					    <div class="input-group">
+					      <span class="input-group-addon" style="width:30%">Party's Contact Number</span>
+					      <input id="e_party_number" type="text" class="form-control col-md-9">
+					    </div> 
+
+					    <div class="input-group">
+					      <span class="input-group-addon" style="width:30%">Mechanic's Name</span>
+					      <input id="e_mechanic_name" type="text" class="form-control col-md-9">
+					    </div> 
+
+					    <div class="input-group">
+					      <span class="input-group-addon" style="width:30%">Mechanic's Contact Number</span>
+					      <input id="e_mechanic_number" type="text" class="form-control col-md-9">
+					    </div> 
+
+					    <div class="input-group">
+					      <span class="input-group-addon" style="width:30%">Problems</span>
+					   		<textarea id="e_problem" cols="60" rows="5"></textarea>
+					    </div> 		
+
+					    
+
+					    <div class="input-group">
+					      <span class="input-group-addon" style="width:30%">Remarks</span>
+					   		<textarea id="e_remarks" cols="60" rows="5"></textarea>
+					    </div> 
+
+					    <p></p>
+						<button class="btn btn-success col-md-12" id="submit_log">Submit</button>
+			        </div>	       
+			    </div>
+			</div>	
+		</div>
+	</div>
+</div>
+
+
+<div class="card">
+    <div class="card-body">
+		<div class="col-md-12">		
+			
+			    <div class="table-responsive">
+			        <div class="col-md-12">
+			        <table  class="table table-striped table-bordered " id="audit_tracker" style="width:100%">
+			        	<thead style="background-color: #28b779;color:white">
+			        		<th>S.No</th>
+			        		<th>User's Name</th>
+			        		<th>Party's Name</th>
+							<th>Party's Contact</th>
+							<th>Mechanic's Name</th>
+							<th>Mechanic's Contact</th>
+							<th>Problems</th>
+							<th>Remarks</th>
+							<th></th>
+							<th></th>
+			        	</thead>
+			        	<tbody id="audit_body">
+			        		{% for z in log_arr %}
+			        		<tr>
+			        			<td>{{forloop.counter}}</td>
+			        			<td>{{z.user_name}}</td>
+			        			<td style="white-space: nowrap;">{{z.party_name}}</td>
+			        			<td style="white-space: nowrap;">{{z.party_number}}</td>
+			        			<td>{{z.mechanic_name}}</td>
+								<td>{{z.mechanic_no}}</td>
+								<td>{{z.problem}}</td>
+								<td>{{z.remarks}}</td>	
+								<td style="white-space: nowrap;">{{z.action_date}}</td>	
+								<td><button value="{{z.userID}},{{z.party_name}},{{z.party_number}},{{z.mechanic_name}},{{z.mechanic_no}},{{z.problem}},{{z.remarks}},{{z.user_name}},{{z.id}}" class="edit btn btn-success edit_info" data-toggle="modal" data-target="#aaaa">Edit</button></td>													
+			        			{% endfor %}
+			        		</tr>
+			        	</tbody>
+			        </table>
+			        </div>	       
+			    </div>
+			</div>			
+	</div>
+</div>
+
+
+
+<div id="aaaa" class="modal fade" role="dialog">
+  <div class="modal-dialog">   
+    <div class="modal-content">
+      <div class="modal-header">       
+        <h4 class="modal-title">System Maintenance Log</h4>
+      </div>
+      <center><div id="info_user_name"></div><div id="exID" style="display: none">V</div></center>
+      <div class="modal-body">
+        <div class="form-group">
+	     <table class="table table-striped table-bordered">
+	     	<thead style="text-align: center;background-color: #28b779;color:white">
+	     		<th>Processor</th>
+	     		<th>HDD</th>
+	     		<th>RAM</th>
+	     		<th>Operating System</th>
+	     		<th>Remarks</th>
+	     	</thead>
+	     	<tbody id="info_details"></tbody>
+	     </table>
+
+	      <div class="form-group">
+	      <label for="gradeName">Party's Name</label>
+	      <input type="text"  class="form-control" id="ex_party_name" placeholder="Enter Party's Name...">
+	    </div>
+
+	    <div class="form-group">
+	      <label for="gradeName">Party's Contact</label>
+	      <input type="text"  class="form-control" id="ex_party_number" placeholder="Enter Party's Contact...">
+	    </div>
+
+	      <div class="form-group">
+	      <label for="gradeName">Mechanic's Name</label>
+	      <input type="text"  class="form-control" id="ex_mechanic_name" placeholder="Enter Mechanic's Name...">
+	    </div>
+
+	      <div class="form-group">
+	      <label for="gradeName">Mechanic's Contact</label>
+	      <input type="text"  class="form-control" id="ex_mechanic_number" placeholder="Enter Mechanic's Contact...">
+	    </div>
+
+	      <div class="form-group">
+	      <label for="gradeName">Problems</label>
+	      <input type="text"  class="form-control" id="ex_problems" placeholder="Enter Problems...">
+	    </div>
+
+	    <div class="form-group">
+	      <label for="gradeName">Remarks</label>
+	      <textarea id="ex_remarks" rows="2" cols="52"></textarea>
+	    </div>	   
+
+		<div class="form-group">
+		<button type="button" class="btn btn-primary" id="update_details">Update</button>
+		</div>
+      </div>
+
+	    
+
+	    </div>	
+		
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default col-md-5" data-dismiss="modal" id="refresh">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<script type="text/javascript">
+	$('#submit_log').click(function(){
+		var e_user_name			= $('#e_user_name').val();
+		var e_party_name		= $('#e_party_name').val();
+		var e_party_number		= $('#e_party_number').val();
+		var e_mechanic_name		= $('#e_mechanic_name').val();
+		var e_mechanic_number	= $('#e_mechanic_number').val();
+		var e_problem			= $('#e_problem').val();
+		var e_remarks			= $('#e_remarks').val();
+
+		$.ajax({
+	      url: '/audit/submit_log/',
+	      dataType: 'JSON',
+	      type: 'GET',
+	      data:
+	      { 
+	      	'e_user_name'       : JSON.stringify(e_user_name),
+			'e_party_name'      : JSON.stringify(e_party_name),
+			'e_party_number'    : JSON.stringify(e_party_number),
+			'e_mechanic_name'   : JSON.stringify(e_mechanic_name),
+			'e_mechanic_number' : JSON.stringify(e_mechanic_number),
+			'e_problem'   		: JSON.stringify(e_problem),
+			'e_remarks'   		: JSON.stringify(e_remarks),	      	
+	      },
+	      success : function(obj){
+	      	
+	        if(obj=='done'){
+	        	alert('Done');	        	
+	        	location.reload(true); 
+	        }if(obj=='no'){
+	        	alert('Already updated.');	        	
+	        }
+	      },
+	      error : function(err){
+	        console.log(JSON.stringify(err,null,4));
+	      }        
+	    });
+	  });
+
+
+// 	function upperCaseF(a){
+//     setTimeout(function(){
+//         a.value = a.value.toUpperCase();
+//     }, 1);
+// }
+
+
+$(".edit_info").click(function(){
+	var user_details = $(this).val();
+	var arr 		 = user_details.split(',')
+	$('#ex_party_name').val(arr[1]);
+	$('#ex_party_number').val(arr[2])
+	$('#ex_mechanic_name').val(arr[3]);
+	$('#ex_mechanic_number').val(arr[4]);
+	$('#ex_problems').val(arr[5]);
+	$('#ex_remarks').val(arr[6]);	
+	$('#info_user_name').text(arr[7]);	
+	$('#exID').val(arr[8]);
+	
+	var userzzz     = arr[0];	
+	$.ajax({
+      url: '/audit/view_sys_info/',
+      dataType: 'JSON',
+      type: 'GET',
+      data:
+      { 
+        'user'  : JSON.stringify(userzzz),
+        
+      },
+      success : function(obj){	      
+      	$('#info_details').empty();	      	
+      	$('#info_details').append('<tr><td>'+obj['weekly_array'][0]['info_processor']+'</td><td>'+obj['weekly_array'][0]['info_hdd']+'</td><td>'+obj['weekly_array'][0]['info_ram']+'</td><td>'+obj['weekly_array'][0]['info_operating_sys']+'</td><td>'+obj['weekly_array'][0]['info_remarks']+'</td></tr>');
+ 
+      },
+      error : function(err){
+        console.log(JSON.stringify(err,null,4));
+      }        
+    });
+});
+
+
+
+$('#update_details').click(function(){	
+		var _party_name 	= $('#ex_party_name').val();
+		var _party_no   	= $('#ex_party_number').val();
+		var _mechanic_name 	= $('#ex_mechanic_name').val();
+		var _mechanic_no   	= $('#ex_mechanic_number').val();
+		var _ex_problems  	= $('#ex_problems').val();
+		var _ex_remarks    	= $('#ex_remarks').val();
+		var _userID         = $('#exID').val();		
+		//alert(_userID);
+		$.ajax({
+	      url: '/audit/update_sys_log/',
+	      dataType: 'JSON',
+	      type: 'GET',
+	      data:
+	      { 
+	        '_party_name'     : JSON.stringify(_party_name),
+	        '_party_no'  	  : JSON.stringify(_party_no),
+	        '_mechanic_name'  : JSON.stringify(_mechanic_name),
+	        '_mechanic_no'    : JSON.stringify(_mechanic_no),
+	        '_ex_problems'    : JSON.stringify(_ex_problems),
+	        '_ex_remarks'     : JSON.stringify(_ex_remarks),
+	        '_userID' 		  : JSON.stringify(_userID),
+	      },
+	      success : function(obj){
+	      	
+	        if(obj=='done'){
+	        	alert('Done');
+	        }	        	
+	      },
+	      error : function(err){
+	        console.log(JSON.stringify(err,null,4));
+	      }        
+	    });
+	})
+
+</script>
+
+
+{% endblock %}

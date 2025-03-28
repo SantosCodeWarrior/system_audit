@@ -1,0 +1,195 @@
+{% extends "base.html" %}
+{% block content %}
+
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+<script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+
+<div class="container">
+	<div class="">
+		<div class="col-md-12">
+			<div id="get_id" style="display: none;"></div>
+			<table class="table table-bordered">
+				<thead>
+				  <tr>
+				    <th>System ID</th>
+				    <th colspan="5"><input type="text" name=""  style="width: 100%" id="e_system_id"></th>
+				  </tr>
+				</thead>
+				<tbody>
+				  <tr>
+				    <td>Category</td>
+				    <td><input type="text" name=""  style="width: 100%" id="e_category"></td>
+				    <td>Party's Name</td>
+				    <td colspan="3"><input type="text" name=""  style="width: 100%" id="e_party_name"></td>
+				  </tr>
+				  <tr>
+				    <td>Status</td>
+				    <td><input type="text" name=""  style="width: 100%" id="e_status"></td>
+				    <td>Brand</td>
+				    <td colspan="3"><input type="text" name=""  style="width: 100%" id="e_brand"></td>
+				  </tr>
+				  <tr>
+				    <td>Purchase Date</td>
+				    <td><input type="date" name=""  style="width: 100%" id="e_purchase_date"></td>
+				    <td>Repaired Date</td>
+				    <td colspan="3"><input type="date" name=""  style="width: 100%" id="e_repaired_date"></td>
+				  </tr>				  
+				</tbody>
+			</table>
+
+			<table class="table table-bordered">
+				<tr>
+				    <td>Warranty Period</td>
+				    <td><input type="text" name=""  style="width: 100%" id="e_warranty_period"></td>
+				    <td>Location</td>
+				    <td colspan="3"><input type="text" name=""  style="width: 100%" id="e_location"></td>
+				  </tr>
+				  <tr>
+				    <td>Total</td>
+				    <td><input type="text" name=""  style="width: 100%" id="e_total"></td>
+				    <td colspan="4" rowspan="4"><center style='display: none'><img src="/static/img/ram.png" width="250px" height="150px"></center></td>
+				  </tr>
+				  <tr>
+				    <td>CGST</td>
+				    <td><input type="text" name=""  style="width: 100%" id="e_gst"></td>
+				  </tr>
+				  <tr>
+				    <td>SGST</td>
+				    <td><input type="text" name=""  style="width: 100%" id="e_sgst"></td>
+				  </tr>
+				  <tr>
+				    <td>G.Total</td>
+				    <td><input type="text" name=""  style="width: 100%" id="e_g_total"></td>
+				  </tr>
+				
+			</table>
+			<button class="btn btn-success" id="btn_submit">SUBMIT</button>
+		</div>
+	</div>
+</div>
+
+
+<script type="text/javascript">
+	function getParameterByName(name, url) {
+    if (!url) {
+      url = window.location.href;
+    }
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
+
+
+function load_bill(){
+var bills = getParameterByName('bills',window.location.href);
+$.ajax({
+  url: '/audit/get_bills_details/',
+  dataType: 'JSON',
+  type: 'GET',
+  data:
+  { 
+    'bills' : bills,            
+  },
+
+  success : function(obj){           
+    $('#e_system_id').val(obj['system_id'])
+   	$('#e_category').val(obj['category'])
+   	$('#e_purchase_date').val(obj['purchase_date'])
+   	$('#e_repaired_date').val(obj['repaired_date'])
+   	$('#e_status').val(obj['status'])
+   	$('#e_brand').val(obj['brand'])
+   	$('#get_id').html(obj['get_id'])
+   
+   	$("#e_system_id").attr("placeholder", obj['system_id']);
+   	$("#e_category").attr("placeholder", obj['category']);
+   	try{   	
+	   	$("#e_purchase_date").attr("placeholder", obj['purchase_date']);
+	   	$("#e_repaired_date").attr("placeholder", obj['repaired_date']);
+	}catch(err){
+
+	}
+
+   	$("#e_status").attr("placeholder", obj['status']);
+   	$("#e_brand").attr("placeholder", obj['brand']);   	
+   	$("#e_location").attr("placeholder", obj['location']);
+
+   	if(obj['party_name']=='Rishi Computer'){
+   		party_name = 'Login Computer';
+   		$("#e_party_name").attr("placeholder",party_name);
+   	}else{
+   		party_name = obj['party_name'];
+   		$("#e_party_name").attr("placeholder",party_name);
+   	}
+   	$('#e_party_name').val(party_name);
+   	$('#e_location').val(obj['location'])
+  },
+  error : function(err){
+    console.log(JSON.stringify(err,null,4));
+  }        
+});
+}
+
+load_bill();
+
+$('#btn_submit').click(function(){
+	var e_gst 			= $('#e_gst').val();
+	var e_sgst 			= $('#e_sgst').val();
+	var e_total 		= $('#e_total').val();
+	var sys_id 			= $('#get_id').html();
+	var e_g_total 		= $('#e_g_total').val();
+	var label_name		= $('#e_system_id').val();
+	var bill_date   	= $('#e_purchase_date').val();
+	var warranty_time 	= $('#e_warranty_period').val();
+	
+	$.ajax({
+	  url: '/audit/submit_bills_details/',
+	  dataType: 'JSON',
+	  type: 'GET',
+	  data:
+	  { 
+	    'e_gst'  			: JSON.stringify(sys_id),
+		'sys_id'  			: JSON.stringify(e_sgst),
+		'e_sgst'  			: JSON.stringify(e_sgst),
+		'e_total'  			: JSON.stringify(e_total),
+		'e_g_total'  		: JSON.stringify(e_g_total),
+		'e_bill_date'  		: JSON.stringify(bill_date),
+		'e_label_name'  	: JSON.stringify(label_name),
+		'e_warranty_time'   : JSON.stringify(warranty_time),
+	  },
+
+	  success : function(obj){           
+	    $('#e_system_id').val(obj['system_id'])
+	   	$('#e_category').val(obj['category'])
+	   	$('#e_purchase_date').val(obj['purchase_date'])
+	   	$('#e_repaired_date').val(obj['repaired_date'])
+	   	$('#e_status').val(obj['status'])
+	   	$('#e_brand').val(obj['brand'])
+	   	$('#get_id').html(obj['get_id'])
+
+	   	if(obj['party_name']=='Rishi Computer'){
+	   		party_name = 'Login Computer';
+	   	}else{
+	   		party_name = obj['party_name'];
+	   	}
+	   	$('#e_party_name').val(party_name);
+	   	$('#e_location').val(obj['location'])
+	  },
+	  error : function(err){
+	    console.log(JSON.stringify(err,null,4));
+	  }      
+    })  
+})
+
+
+</script> 
+{% endblock %}
+
+
+
+
+

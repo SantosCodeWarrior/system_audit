@@ -1,0 +1,163 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style type="text/css">
+	textarea {
+   resize: none;
+}
+</style>
+
+ <div class="card">
+    <div class="card-body">
+		<div class="col-md-12">   
+			<h3 id="header"><center>Assets Register</center></h3>	
+			<div class="container">
+			    <div class="row">
+			        <div class="col-md-10">				   
+
+					    <div class="input-group">
+					      <span class="input-group-addon" style="width:30%">ID</span>
+					      <input id="e_id" type="text" class="form-control col-md-9">
+					    </div> 
+
+					    <div class="input-group">
+					      <span class="input-group-addon" style="width:30%">Type (IT/ Non-IT)</span>			    
+					     <select class="form-control" id="e_non_it">
+                                <option id="0">Select User Name</option>                                
+                                <option id="operation">Operation</option> 
+                                <option id="it_room">IT Room</option>                               
+                            </select>
+					    </div>  
+
+					    <div class="input-group">
+					      <span class="input-group-addon" style="width:30%">Class - Peripherals/Network/Fittings</span>			    
+					      <input id="e_fitting" type="text" class="form-control col-md-9" onkeydown="upperCaseF(this)" value="Peripheral">
+					    </div> 
+
+					    <div class="input-group">
+					      <span class="input-group-addon" style="width:30%">Description</span>
+					      <input id="e_description" type="text" class="form-control col-md-9" value="CPU,Keyboard,Mouse,UPS,Monitor">
+					    </div> 
+
+					     <div class="input-group">
+					      <span class="input-group-addon" style="width:30%">Location</span>
+					      <select class="form-control" id="e_location">
+                                <option id="0">Select Location</option>                                
+                                <option id="operation">Operation</option>                              
+                                <option id="it_room">IT Room</option>                               
+                            </select>
+					    </div> 
+
+					     <div class="input-group">
+					      <span class="input-group-addon" style="width:30%">User Alloted</span>
+					   	  <select class="form-control" id="e_user_allotted">
+                                 <option id="0">Select User Name</option>
+                                {% for x in user_details %}
+                                <option id="{{x.user_id}}">{{x.user_name}}</option>
+                                {% endfor %}
+                            </select>
+					    </div> 
+
+					    <div class="input-group">
+					      <span class="input-group-addon" style="width:30%">Security Level</span>
+					       <select class="form-control" id="e_security_level">
+	                            <option id="0">Security Level</option>                                
+	                            <option id="1-Highest">1-Highest</option>
+	                            <option id="2-High">2-High</option>
+	                            <option id="3- Medium">3- Medium</option>    
+	                            <option id="4- Low">4- Low</option>                               
+                            </select>					 
+					    </div> 
+
+					    <div class="input-group">
+					      <span class="input-group-addon" style="width:30%">Maintenance Schedule</span>
+					   	 <input id="e_maintenance" type="text" class="form-control col-md-9" value="Weekly">
+					    </div> 
+
+					      <div class="input-group">
+					      <span class="input-group-addon" style="width:30%">Last Record Date</span>
+					   	 <input id="e_record_date" type="date" class="form-control col-md-9">
+					    </div> 
+
+					     <div class="input-group">
+					      <span class="input-group-addon" style="width:30%">Remarks</span>
+					   		<textarea id="e_remarks" cols="60" rows="5"></textarea>
+					    </div> 
+
+					    <p></p>
+						<button class="btn btn-success col-md-12" id="submit_registor">Submit</button>
+			        </div>	       
+			    </div>
+			</div>	
+		</div>
+	</div>
+</div>
+
+
+<script type="text/javascript">
+	$('#submit_registor').click(function(){
+		var e_id   				= $('#e_id').val();
+		var e_non_it   			= $('#e_non_it').val();
+		var e_fitting   		= $('#e_fitting').val();
+		var e_description   	= $('#e_description').val();
+		var e_location   		= $('#e_location').val();
+		var e_user_allotted   	= $('#e_user_allotted').val();
+		var e_security_level   	= $('#e_security_level').val();
+		var e_maintenance   	= $('#e_maintenance').val();
+		var e_record_date   	= $('#e_record_date').val();
+		var e_remarks   		= $('#e_remarks').val();
+
+	
+
+	if(e_non_it=='Select User Name'){
+		alert("Please fill up");
+		return;
+	}
+
+		$.ajax({
+	      url: '/audit/submit_register_entry/',
+	      dataType: 'JSON',
+	      type: 'GET',
+	      data:
+	      { 
+	      	'e_id'              : JSON.stringify(e_id),
+			'e_non_it'      	: JSON.stringify(e_non_it),
+			'e_fitting'     	: JSON.stringify(e_fitting),
+			'e_description'		: JSON.stringify(e_description),
+			'e_location'   		: JSON.stringify(e_location),
+			'e_user_allotted'   : JSON.stringify(e_user_allotted),
+			'e_security_level'  : JSON.stringify(e_security_level),
+			'e_maintenance'   	: JSON.stringify(e_maintenance),
+			'e_record_date'  	: JSON.stringify(e_record_date),
+			'e_remarks'         : JSON.stringify(e_remarks),
+	      },
+	      success : function(obj){
+	      	
+	        if(obj=='done'){
+	        	alert('Done');
+	        	$('#e_user_name').val('');
+	        	location.reload(true); 
+	        }if(obj=='already'){
+	        	alert('Already updated.');
+	        	$('#e_user_name').val('');
+	        }
+	      },
+	      error : function(err){
+	        console.log(JSON.stringify(err,null,4));
+	      }        
+	    });
+	  });
+
+
+	function upperCaseF(a){
+    setTimeout(function(){
+        a.value = a.value.toUpperCase();
+    }, 1);
+}
+
+$('#e_id').val('{{next_key}}');
+	
+</script>
+
+
+{% endblock %}

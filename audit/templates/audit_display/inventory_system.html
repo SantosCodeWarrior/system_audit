@@ -1,0 +1,701 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style type="text/css">
+	textarea {
+   resize: none;
+}
+
+.dot {
+ 
+}
+
+.form-control:focus {
+  border-color: #FF0000;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 0, 0, 0.6);
+}
+
+.table td {
+ padding: 2px;
+ color:black;
+}
+
+
+
+</style>
+
+<script type="text/javascript">
+	$(function(){
+    	//$("#ee_purchase_date").datepicker();
+  });
+
+</script>
+
+    <div class="">
+		<div class="col-md-12">
+			<h3 style="text-align: center;">Inventory Management System</h3>
+			<table class="table table-bordered" style="font-size: 9px;padding: 0px;width: 100px">						
+				<thead>
+				  <tr>
+				    <th style="margin-left: 4px">Category</th>
+				    <th><input type="text" id="category_details" class="form-control"  style="font-size: 9px;color: black;text-transform: uppercase;"><!-- <select class="form-control" id="category_details"  style="font-size: 9px;color: black">
+				      <option value="0"></option>
+				      <option value="UPS">UPS</option>
+				      <option value="Monitor">Monitor</option>
+				      <option value="Mouse Pad">Mouse Pad</option>
+				      <option value="Keyboard">Keyboard</option>
+				      <option value="Mouse">Mouse</option>
+				      <option value="Power Cable">Power Cable</option>
+				      <option value="VGA Cable">VGA Cable</option>
+				      <option value="Camera">Camera</option>
+				      <option value="Router">Router</option>
+				      <option value="Switch">Switch</option>
+				      <option value="Printer">Printer</option>
+				      <option value="EHDD">EHDD</option>
+				      <option value="Laptop">Laptop</option>
+				      <option value="CCTV">CCTV</option>
+				      <option value="CPU">CPU</option>
+				      <option value="RAM">RAM</option>
+				      <option value="HP">Headphone</option>
+				      <option value="SMPS">SMPS</option>
+				      <option value="Motherboard">Motherboard</option>
+				      <option value="Other">Other</option>
+				      </select> --></th>
+				    <th>Status</th>
+				    <th><select class="form-control" id="status_details"  style="font-size: 9px;color: black">
+				      <option value="0"></option>
+				      <option value="New">New</option>
+				      <option value="Repaired">Repaired</option>
+				      <option value="Good">Good</option>
+				      <option value="Average">Average</option>
+				      <option value="Poor">Poor</option>					     
+				      <option value="Damaged">Damaged</option>
+				      <option value="Upgraded">Upgraded</option>
+				      </select>	</th>
+				    <th>Brand</th>
+				    <th><input type="text" id="brand_details" class="form-control"  style="font-size: 9px;color: black;text-transform: uppercase;"><!-- <select class="form-control" id="brand_details"  style="font-size: 9px;color: black">
+				        <option value="0"></option>
+				        <option value="Samsung">Samsung</option>
+						<option value="Intel">Intel</option>
+						<option value="Enter">Enter</option>
+						<option value="Sony">Sony</option>
+						<option value="ASUS">ASUS</option>
+						<option value="Acer">Acer</option>
+						<option value="HP">HP</option>
+						<option value="IBM">IBM</option>
+						<option value="Razer">Razer</option>
+						<option value="Alienware">Alienware</option>
+						<option value="Panasonic">Panasonic</option>
+						<option value="Toshiba">Toshiba</option>
+						<option value="iBuyPower">iBuyPower</option>
+						<option value="Lapcare">Lapcare</option>
+						<option value="Punta">Punta</option>
+						<option value="MSI">MSI</option>
+						<option value="LG">LG</option>
+						<option value="DELL">DELL</option>
+						<option value="NOKIA">NOKIA</option>
+						<option value="Fujitsu">Fujitsu</option>
+						<option value="NEC">NEC</option>
+						<option value="Logitech">Logitech</option>
+						<option value="Gateway Computers">Gateway Computers</option>
+						<option value="Segate">Segate</option>
+						<option value="Compaq">Compaq</option>
+						<option value="Hikvision">Hikvision</option>
+						<option value="Velocity Micro">Velocity Micro</option>
+						<option value="HCL">HCL</option>
+						<option value="Zebronics">Zebronics</option>
+						<option value="Emerson">Emerson</option>
+						<option value="Sprint">Sprint</option>
+						<option value="Smart Desk">Smart Desk</option>
+						<option value="CyberPower">CyberPower</option>
+						<option value="Nvidia">Nvidia</option>
+						<option value="BenQ">BenQ</option>
+						<option value="Digital Storm">Digital Storm</option>
+						<option value="Falcon Northwest">Falcon Northwest</option>
+						<option value="Origin">Origin</option>
+						<option value="Verizon">Verizon</option>
+						<option value="Corsair">Corsair</option>
+						<option value="AMD">AMD</option>
+						<option value="Gigabyte">Gigabyte</option>
+						<option value="Vaio">Vaio</option>
+						<option value="Medion">Medion</option>
+						<option value="Maingear">Maingear</option>
+						<option value="Logitech">Logitech</option>
+						<option value="V3">V3</option>
+						<option value="System 76">System 76</option>
+						<option value="Packard Bell">Packard Bell</option>
+						<option value="PineApple Computers">PineApple Computers</option>
+						<option value="Cyberware">Cyberware</option>
+						<option value="Alcatel-Lucent">Alcatel-Lucent</option>
+						<option value="Hasee">Hasee</option>
+						<option value="Tsinghua Tongfang">Tsinghua Tongfang</option>
+						<option value="Haier">Haier</option>
+						<option value="NTT Data Corporation">NTT Data Corporation</option>
+						<option value="KDDI">KDDI</option>
+						<option value="Canon">Canon</option>
+						<option value="Hitachi">Hitachi</option>
+						<option value="Mitsubishi Electronic">Mitsubishi Electronic</option>
+
+					</select> --></th>
+				  </tr>
+				</thead>
+				<tbody>
+				  <tr>
+				    <td>Label</td>
+				    <td>
+				    	<select class="form-control" id="max_label"  style="font-size: 9px;">
+				    	<option value="0"></option>
+				    	{% for c in user_details %}
+				    		<option value="{{c.user_name}}">{{c.user_name}}</option>
+				    	{% endfor %}
+				    	</select>
+				    </td>
+				    <td>Stock</td>
+				    <td><input id="stock_details" type="number" class="form-control"></td>
+				    <td>Active</td>
+				    <td><select class="form-control" id="active_details" style="font-size: 9px;color: black">
+				    <option value="-1"></option>
+			      	<option value="0">Inactive</option>
+					<option value="1">Active</option>
+			      </select></td>
+				  </tr>
+				  <tr>
+				    <td style="white-space: nowrap;">Purchase's Date</td>
+				    <td><input id="purchase_date_details" type="date" class="form-control" style="font-size: 9px"> </td>
+				    <td style="white-space: nowrap;">Issue's Date</td>
+				    <td><input id="issue_date_details" type="date" class="form-control" style="font-size: 9px"></td>
+				    <td style="white-space: nowrap;">Repaired's Date</td>
+				    <td><input id="repaired_date_details" type="date" class="form-control" style="font-size: 9px"></td>
+				  </tr>
+				  <tr>
+				    <td style="white-space: nowrap;">Party's Name</td>
+				    <td><input id="party_name" type="text" class="form-control"></td>
+				    <td style="white-space: nowrap;">Party's Contact</td>
+				    <td><input id="party_contact" type="text" class="form-control"></td>
+				    <td style="white-space: nowrap;">Mechanic's Name</td>
+				    <td><input id="mechanic_name" type="text" class="form-control"></td>
+				  </tr>
+				  <tr>
+				    <td style="white-space: nowrap;">Mechanic's Contact</td>
+				    <td><input id="mechanic_contact" type="text" class="form-control"></td>
+				    <td>Problem</td>
+				    <td colspan="3"> <textarea id="problem_details" class="form-control" rows="4" cols="60" style="width: 560px; margin-top: 0px; margin-bottom: 0px; height: 60px;"></textarea></td>
+				  </tr>
+				  <tr>
+				    <td>Remarks</td>
+				    <td colspan="5"><textarea id="remarks_details" class="form-control" rows="4" cols="60" style="width: 913px; margin-top: 0px; margin-bottom: 0px; height: 60px;"></textarea></td>
+				  </tr>
+				  <tr>
+				    <td colspan="6" style="text-align: center;"><button class="btn btn-success col-md-3" id="submit_user">Submit</button> <button class="btn btn-warning col-md-3" id="export_sys">EXPORT</button></td>
+				  <!--   <td colspan="4"><button class="btn btn-warning col-md-6" id="export_sys">EXPORT</button></td> -->
+				  </tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	
+
+    <div class="card-body">
+		<div class="col-md-12">
+		   <!--  <div class="box-header">		     
+		      <br>
+		     <div class="row" style="margin-top: -324px;margin-left: 691px;display: none">
+			    <table border="1">
+			    	<thead style="background-color: grey;color:white">
+			    		<th>Total</th>
+			    		<th>Items </th>
+			    	</thead>
+			    	<tr>
+			    	{% for c in item_array %}
+			    		<td>{{c.total_item}}</td>
+			    		<td>{{c.item_name}}</td>
+			    		</tr>
+			    		{% endfor %}			
+   		 			</table>
+			  </div>
+		    </div> -->
+		    <div class="box-body">
+		      <table  class="table table-striped table-bordered" id="user_details" style="font-size: 9px;color: black">
+		        <thead>
+		          <tr>
+		          	<th>View</th>
+		            <th>S.No</th>
+		            <th></th>
+		            <th></th>
+		            <th>Location</th>		 		           
+		            <th>Active</th>			            
+		            <th>Label</th>
+		            <th>Category</th>
+		            <th>Status</th>
+		            <th>Brand</th>
+		            <th>Stock</th>
+		            <th>Purchase's Date</th>
+		            <th>Issue's Date</th>
+		            <th>Repaired's Date</th>
+		            <th>Party's Name</th>
+		            <th>Party's Contact</th>
+		            <th>Mechanic's Name</th>
+		            <th>Mechanic's Contact</th>
+		            <th>Problem</th>
+		            <th>Remarks</th>
+		            <th style="display: none"></th>
+		            <th style="display: none"></th>
+		            <th style="display: none"></th>
+		            <th style="display: none"></th>
+		            <th style="display: none"></th>
+		            <
+		          </tr>
+		        </thead>
+		        <tbody style="font-size: 12px">
+		        	{% for x in inventory_details %}
+		        	<tr>
+		        	<td><a href="/audit/view_bills/?bills={{x.id}}" target="_blank">View</a></td>
+		        	<td>{{forloop.counter}}</td>
+					<td><button class="edit btn btn-success edit_info" data-toggle="modal" data-target="#myModal" style="font-size: 12px">Edit</button></td>
+					<td>{{x.expire}}</td>
+					<td style="white-space: nowrap;">{{x.locations}}</td>
+		        	<td><span class="dot" style=" height: 25px;width: 25px;background-color: {{x.color}};border-radius: 50%;display: inline-block;"></span></td>
+					<td class="label" style="color:black">{{x.label|default_if_none:""}}</td>
+		        	<td class="category" style="color:black">{{x.category|default_if_none:""}}</td>
+					<td class="status" style="color:black">{{x.status|default_if_none:""}}</td>
+					<td class="brand" style="color:black;text-transform: capitalize">{{x.brand|default_if_none:""}}</td>
+					<td class="stock" style="color:black">{{x.stock|default_if_none:""}}</td>
+					
+
+					<td class="" style="color:black">{{x.purchase_date|date:"d-M-Y"}}</td>
+					<td class="" style="color:black">{{x.issue_date|date:"d-M-Y"}}</td>
+					<td class="" style="color:black">{{x.repaired_date|date:"d-M-Y"}}</td>
+					<td class="party_name" style="color:black">{{x.party_name|default_if_none:""}}</td>
+					<td class="party_contact" style="text-transform: capitalize;color:black">{{x.party_contact|default_if_none:""}}</td>
+					<td class="mechanic_name" style="color:black">{{x.mechanic_name|default_if_none:""}}</td>
+					<td class="mechanic_contact" style="color:black">{{x.mechanic_contact|default_if_none:""}}</td>
+					<td class="problem" style="color:black">{{x.issue_any|default_if_none:""}}</td>
+					<td class="remarks" style="color:black">{{x.remarks|default_if_none:""}}</td>
+		        	<td class="active" style="display: none">{{x.active}}</td>	        	
+		        	<td class="id" style="display: none">{{x.id}}</td>
+					<td class="purchase_date" style="color:black;display: none">{{x.purchase_date|date:'Y-m-d'}}</td>
+					<td class="issue_date" style="color:black;display: none">{{x.issue_date|date:'Y-m-d'}}</td>
+					<td class="repaired_date" style="color:black;display: none">{{x.repaired_date|date:'Y-m-d'}}</td>
+
+		        	{% endfor %}
+		        	</tr>
+		        </tbody>		        
+		      </table>
+		    </div>
+		</div>
+	</div>
+</div>
+
+
+
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">   
+    <div class="modal-content">
+      <div class="modal-header">       
+        <h4 class="modal-title">Inventory's Information</h4>
+      </div>
+
+      <div class="modal-body">
+      	 <div class="form-group">
+	      <label for="gradeName">Active</label>
+	      <select class="form-control" id="ee_active">
+	      <option value="-1"></option>
+	      <option value="0">Inactive</option>
+	      <option value="1">Active</option>	      
+	      </select>
+	    </div>	  
+
+        <div class="form-group">
+	      <label for="gradeName">Category</label>
+	      <input type="text" name="" class="form-control" id="ee_category_details">
+	      <!-- <select class="form-control" id="ee_category_details">
+	      <option value="0"></option>
+	      <option value="UPS">UPS</option>
+	      <option value="Monitor">Monitor</option>
+	      <option value="Mouse Pad">Mouse Pad</option>
+	      <option value="Keyboard">Keyboard</option>
+	      <option value="Mouse">Mouse</option>
+	      <option value="Power Cable">Power Cable</option>
+	      <option value="VGA Cable">VGA Cable</option>
+	      <option value="Camera">Camera</option>
+	      <option value="Router">Router</option>
+	      <option value="Switch">Switch</option>
+	      <option value="Printer">Printer</option>
+	      <option value="EHDD">EHDD</option>
+	      <option value="Laptop">Laptop</option>
+	      <option value="CCTV">CCTV</option>
+	      <option value="CPU">CPU</option>
+	      <option value="RAM">RAM</option>
+	      <option value="HP">Headphone</option>
+	      <option value="SMPS">SMPS</option>
+	      <option value="Motherboard">Motherboard</option>
+	      <option value="Other">Other</option>
+	      </select> -->
+	    </div>
+
+	    <div class="form-group">
+	      <label for="gradeName">Status</label>
+	      <select class="form-control" id="ee_status_details">
+	      <option value="0"></option>
+	      <option value="New">New</option>
+	      <option value="Repair">Repair</option>
+	      <option value="Good">Good</option>
+	      <option value="Average">Average</option>
+	       <option value="Damaged">Damaged</option>
+	      <option value="Poor">Poor</option>					     
+	      </select>	
+	    </div>
+
+	    <div class="form-group">
+	      <label for="gradeName">Brand</label>
+	      <input type="text" name="" class="form-control" id="ee_brand_details">
+	      <!-- <select class="form-control" id="ee_brand_details">
+	        <option value="0"></option>
+	        <option value="Samsung">Samsung</option>
+			<option value="Intel">Intel</option>
+			<option value="Enter">Enter</option>
+			<option value="Sony">Sony</option>
+			<option value="ASUS">ASUS</option>
+			<option value="Acer">Acer</option>
+			<option value="HP">HP</option>
+			<option value="IBM">IBM</option>
+			<option value="Razer">Razer</option>
+			<option value="Alienware">Alienware</option>
+			<option value="Panasonic">Panasonic</option>
+			<option value="Toshiba">Toshiba</option>
+			<option value="iBuyPower">iBuyPower</option>
+			<option value="Lapcare">Lapcare</option>
+			<option value="Punta">Punta</option>
+			<option value="MSI">MSI</option>
+			<option value="LG">LG</option>
+			<option value="NOKIA">NOKIA</option>
+			<option value="Segate">Segate</option>
+			<option value="Fujitsu">Fujitsu</option>
+			<option value="NEC">NEC</option>
+			<option value="Gateway Computers">Gateway Computers</option>
+			<option value="Compaq">Compaq</option>
+			<option value="Velocity Micro">Velocity Micro</option>
+			<option value="HCL">HCL</option>
+			<option value="Zebronics">Zebronics</option>
+			<option value="Emerson">Emerson</option>
+			<option value="Sprint">Sprint</option>
+			<option value="Hikvision">Hikvision</option>
+			<option value="Smart Desk">Smart Desk</option>
+			<option value="CyberPower">CyberPower</option>
+			<option value="Nvidia">Nvidia</option>
+			<option value="BenQ">BenQ</option>
+			<option value="Digital Storm">Digital Storm</option>
+			<option value="Falcon Northwest">Falcon Northwest</option>
+			<option value="Origin">Origin</option>
+			<option value="Verizon">Verizon</option>
+			<option value="Corsair">Corsair</option>
+			<option value="AMD">AMD</option>
+			<option value="DELL">DELL</option>
+			<option value="Gigabyte">Gigabyte</option>
+			<option value="Vaio">Vaio</option>
+			<option value="Medion">Medion</option>
+			<option value="Maingear">Maingear</option>
+			<option value="Logitech">Logitech</option>
+			<option value="V3">V3</option>
+			<option value="System 76">System 76</option>
+			<option value="Packard Bell">Packard Bell</option>
+			<option value="PineApple Computers">PineApple Computers</option>
+			<option value="Cyberware">Cyberware</option>
+			<option value="Alcatel-Lucent">Alcatel-Lucent</option>
+			<option value="Hasee">Hasee</option>
+			<option value="Tsinghua Tongfang">Tsinghua Tongfang</option>
+			<option value="Haier">Haier</option>
+			<option value="NTT Data Corporation">NTT Data Corporation</option>
+			<option value="KDDI">KDDI</option>
+			<option value="Canon">Canon</option>
+			<option value="Hitachi">Hitachi</option>
+			<option value="Mitsubishi Electronic">Mitsubishi Electronic</option>
+		</select> -->
+	    </div>
+
+	      <div class="form-group">
+	      <label for="gradeName">Stock</label>
+	      <input type="number"  class="form-control" id="ee_stock">
+	    </div>
+
+	      <div class="form-group">
+	      <label for="gradeName">Purchase's Date</label>
+	      <input type="date"  class="form-control" id="ee_purchase_date">
+	    </div>
+
+	      <div class="form-group">
+	      <label for="gradeName">Issue's Date</label>
+	      <input type="date"  class="form-control" id="ee_issue_date">
+	    </div>
+
+	     <div class="form-group">
+	      <label for="gradeName">Repaired's Date</label>
+	      <input type="date"  class="form-control" id="ee_repaired_date">
+	    </div>
+
+	      <div class="form-group">
+	      <label for="gradeName">Party's Name</label>
+	      <input type="text"  class="form-control" id="ee_party_name">
+	    </div>
+
+	    <div class="form-group">
+	      <label for="gradeName">Party's Contact</label>
+	      <input type="text"  class="form-control" id="ee_party_contact">
+	    </div>
+
+	    <div class="form-group">
+	      <label for="gradeName">Mechanic's Name</label>
+	      <input type="text"  class="form-control" id="ee_mechanic_name">
+	    </div>
+
+	    <div class="form-group">
+	      <label for="gradeName">Mechanic's Contact</label>
+	      <input type="text"  class="form-control" id="ee_mechanic_contact">
+	    </div>
+
+	    <div class="form-group">
+	      <label for="gradeName">Problem</label>
+	      <input type="text"  class="form-control" id="ee_problem">
+	    </div>
+
+	    <div class="form-group">
+	      <label for="gradeName">Remarks</label>
+	      <textarea id="ee_remarks" rows="2" cols="52"></textarea>
+	    </div>
+
+	    
+
+	    <div id="ee_selectID" style="display: none"></div>  
+
+		<div class="form-group">
+		<button type="button" class="btn btn-primary" id="update_details">Update</button>
+		</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="refresh">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+<script type="text/javascript">
+	$('#submit_user').click(function(){
+	var category_details  		 = $('#category_details').val();
+	var status_details  		 = $('#status_details').val();
+	var brand_details  			 = $('#brand_details').val();
+	var max_label  				 = $('#max_label').val();
+	var stock_details  			 = $('#stock_details').val();
+	var purchase_date_details  	 = $('#purchase_date_details').val();
+	var issue_date_details  	 = $('#issue_date_details').val();
+	var repaired_date_details  	 = $('#repaired_date_details').val();
+	var party_name  			 = $('#party_name').val();
+	var party_contact  			 = $('#party_contact').val();
+	var mechanic_name  			 = $('#mechanic_name').val();
+	var mechanic_contact  		 = $('#mechanic_contact').val();
+	var problem_details  		 = $('#problem_details').val();
+	var remarks_details  		 = $('#remarks_details').val();
+	var active_details 			 = $('#active_details').val();
+	if(category_details==0){
+		alert('Please fill up the field');
+		$('#category_details').focus();
+		$('#category_details').css('background-color','red');
+		return 0;
+	}
+	if(max_label==0){
+		alert('Please fill up the field');
+		$('#max_label').focus();
+		$('#max_label').css('background-color','red');
+		return 0;
+	}
+
+		$.ajax({
+	      url: '/audit/submit_inventory_entry/',
+	      dataType: 'JSON',
+	      type: 'GET',
+	      data:
+	      { 
+	      	'category_details'  	 : category_details,
+			'status_details'    	 : status_details,
+			'brand_details'     	 : brand_details,
+			'max_label'    			 : max_label,
+			'stock_details'  		 : stock_details,
+			'purchase_date_details'  : purchase_date_details,
+			'issue_date_details'  	 : issue_date_details,
+			'repaired_date_details'  : repaired_date_details,
+			'party_name'  			 : party_name,
+			'party_contact'  		 : party_contact,
+			'mechanic_name'  		 : mechanic_name,
+			'mechanic_contact'  	 : mechanic_contact,
+			'problem_details'  		 : problem_details,
+			'remarks_details'   	 : remarks_details,
+			'active_details'  		 : active_details,
+	        
+	      },
+	      success : function(obj){
+	      	if(obj=='no'){
+	      		alert('Stock successfully submitted');
+	      		location.reload();
+	      	}else{
+	      		alert('Stock already submitted')
+	      	}
+
+	        
+	      },
+	      error : function(err){
+	        console.log(JSON.stringify(err,null,4));
+	      }        
+	    });
+	  });
+
+
+$('#category_details').change(function(){
+	$('#category_details').css('background-color','white');
+})
+
+$('#max_label').change(function(){
+	$('#max_label').css('background-color','white');
+})
+
+
+
+$(".edit_info").click(function() {	
+  var id        	 	= $(this).closest("tr").find(".id").text();
+  var active 	 		= $(this).closest("tr").find(".active").text();
+  var label 	 		= $(this).closest("tr").find(".label").text();
+  var category 			= $(this).closest("tr").find(".category").text();
+  var status 			= $(this).closest("tr").find(".status").text();
+  var brand  	 		= $(this).closest("tr").find(".brand").text();
+  var stock 	 	 	= $(this).closest("tr").find(".stock").text();
+  var purchase_date 	= $(this).closest("tr").find(".purchase_date").text();
+  var issue_date 		= $(this).closest("tr").find(".issue_date").text();
+  var repaired_date  	= $(this).closest("tr").find(".repaired_date").text();
+  var party_name 		= $(this).closest("tr").find(".party_name").text();  
+  var party_contact 	= $(this).closest("tr").find(".party_contact").text();  
+  var mechanic_name  	= $(this).closest("tr").find(".mechanic_name").text();
+  var mechanic_contact  = $(this).closest("tr").find(".mechanic_contact").text();  
+  var problem  			= $(this).closest("tr").find(".problem").text();  
+  var remarks  			= $(this).closest("tr").find(".remarks").text();  
+
+  get_user_details(id,active,label,category,status,brand,stock,purchase_date,issue_date,repaired_date,party_name,party_contact,mechanic_name,mechanic_contact,problem,remarks);
+});
+
+
+function  get_user_details(id,active,label,category,status,brand,stock,purchase_date,issue_date,repaired_date,party_name,party_contact,mechanic_name,mechanic_contact,problem,remarks){
+	selected_id = id;		
+	$('#ee_active').val(active);
+	$('#ee_category_details').val(category);
+	$('#ee_status_details').val(status);
+	$('#ee_brand_details').val(brand);
+	$('#ee_stock').val(stock);
+	$('#ee_purchase_date').val(purchase_date);
+	$('#ee_issue_date').val(issue_date);
+	$('#ee_repaired_date').val(repaired_date);
+	$('#ee_party_name').val(party_name);
+	$('#ee_party_contact').val(party_contact);
+	$('#ee_mechanic_name').val(mechanic_name);
+	$('#ee_mechanic_contact').val(mechanic_contact);
+	$('#ee_problem').val(problem);
+	$('#ee_remarks').val(remarks);	
+	$('#ee_selectID').val(selected_id);	
+  }
+
+  	$('#ee_hdd').css('text-transform','uppercase');
+	$('#ee_keyboard').css('text-transform','uppercase');
+	$('#ee_mouse').css('text-transform','uppercase');
+	$('#ee_monitor').css('text-transform','uppercase');
+	$('#ee_smps').css('text-transform','uppercase');
+
+
+
+$('#update_details').click(function(){
+	var ex_active  				= $('#ee_active').val();
+	var ex_category_details  	= $('#ee_category_details').val();
+	var ex_status_details  		= $('#ee_status_details').val();
+	var ex_brand_details  		= $('#ee_brand_details').val();
+	var ex_stock  				= $('#ee_stock').val();
+	var ex_purchase_date  		= $('#ee_purchase_date').val();
+	var ex_issue_date  			= $('#ee_issue_date').val();
+	var ex_repaired_date  		= $('#ee_repaired_date').val();
+	var ex_party_name  			= $('#ee_party_name').val();
+	var ex_party_contact  		= $('#ee_party_contact').val();
+	var ex_mechanic_name  		= $('#ee_mechanic_name').val();
+	var ex_mechanic_contact  	= $('#ee_mechanic_contact').val();
+	var ex_problem  			= $('#ee_problem').val();
+	var ex_remarks  			= $('#ee_remarks').val();
+	var ex_selectID  			= $('#ee_selectID').val();
+	
+  	$.ajax({
+	      url: '/audit/update_inventory_details/',
+	      dataType: 'JSON',
+	      type: 'GET',
+	      data:
+	      {
+	      	'active'			: JSON.stringify(ex_active),
+			'category_details'	: JSON.stringify(ex_category_details),
+			'status_details'	: JSON.stringify(ex_status_details),
+			'brand_details'		: JSON.stringify(ex_brand_details),
+			'stock'				: JSON.stringify(ex_stock),
+			'purchase_date'		: JSON.stringify(ex_purchase_date),
+			'issue_date'		: JSON.stringify(ex_issue_date),
+			'repaired_date'		: JSON.stringify(ex_repaired_date),
+			'party_name'		: JSON.stringify(ex_party_name),
+			'party_contact'		: JSON.stringify(ex_party_contact),
+			'mechanic_name'		: JSON.stringify(ex_mechanic_name),
+			'mechanic_contact'	: JSON.stringify(ex_mechanic_contact),
+			'problem'			: JSON.stringify(ex_problem),
+			'remarks'			: JSON.stringify(ex_remarks),
+	     	'selectID'			: JSON.stringify(ex_selectID),			
+	      },
+
+	      success : function(obj){ 
+	        if(obj=='done'){
+	        	alert('Successfully updated.');
+	        	}
+	        	location.reload();
+	      },
+	      error : function(err){
+	        console.log(JSON.stringify(err,null,4));
+	      }        
+	    });
+	})
+
+
+
+function load_xlsx(){
+ $("#loaders").css('display','');
+   var user_details = $('#user_details').tableToJSON();   
+   
+    $.ajax({
+      url      : "/audit/export_inventory_details/",
+      type     : 'POST',
+      dataType : 'JSON',
+      data :
+      {
+        'user_details' : JSON.stringify(user_details),
+        
+      },
+      success:function(obj){
+        $("#loaders").css('display','none');
+        location.href = "/audit/export_inventory_list/";
+
+      },
+      error:function(err){
+        alert(JSON.stringify(err,null,4));
+      }
+  });
+}
+
+$('#export_sys').click(function(){   
+    load_xlsx();
+})
+
+
+$('#max_label').select2();
+
+</script>
+
+
+{% endblock %}

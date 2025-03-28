@@ -1,0 +1,519 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+<!-- <div class="container-fluid">                
+    <div class="row" style="display: none">                   
+        <div class="col-md-6 col-lg-2 col-xlg-3">
+            <div class="card card-hover">
+                <div class="box bg-cyan text-center">
+                    <h1 class="font-light text-white"><i class="mdi mdi-view-dashboard"></i></h1>
+                    <h6 class="text-white"></h6>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-2 col-xlg-3">
+            <div class="card card-hover">
+                <div class="box bg-warning text-center">
+                    <h1 class="font-light text-white"><i class="mdi mdi-collage"></i></h1>
+                    <h6 class="text-white"></h6>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+<div class="card">
+    <div class="card-body">
+        <div class="col-md-12" style="margin-top:100px"> 
+            <center><h1>System Audit</h1></center> 
+            <center><b>{{next_audit}}</b></center> 
+           <center> <img src="/static/img/audit.gif" width="290" height="190"></center> 
+            <h3 id="header"><center><b>Weekly IT Maintenance Monitoring</b></center></h3>   
+        </div>
+    </div>
+</div>    
+</div> -->
+<center>
+
+
+<div class="card">
+    <div class="card-body">
+
+<div id="surveys" class="surveys col-xs-12">
+    <div>
+        <div class="col-xs-12">
+            <h4 style="text-transform: uppercase;"><center>System Configuration</center></h4>
+            <div class="row">
+                <div class="col-xs-12" id="title">
+                </div>
+                <div id="surveys-list" class="col-xs-12">
+                    <div>
+                        <div id="surveys-list-container row">
+                            {% for x in final_arr %}
+                            <div class="survey-item col-md-3 col-xs-6" style="display: ''">
+                                <div id="2697033" class="item survey">
+                                    <span class="note new">&nbsp;Opened&nbsp;</span>
+                                    <div id="" class="">
+                                        <div class="">
+                                            <p class="">                                           
+                                            <i class="fa fa-desktop" aria-hidden="true"></i>
+                                            <!-- <span class="value"><a href="/audit/entry_form/?user_name={{x.user_name}}" target="_blank">({{x.s_no}}) - {{x.user_name}}</a></span> -->
+                                            <span class="value"><u type="button" class="edit" data-toggle="modal" data-target="#myModal" style="cursor: pointer;" id="{{x.sid}}">({{x.s_no}}) - {{x.user_name}}</u><sup style="color:{{x.colorCode}}">{{x.location}}</sup></span>
+                                               
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div id="loi-box" class="loi-box">
+                                      
+                                    </div>
+                                </div>
+                            </div>
+
+                            {% endfor %}
+                          
+                           
+                       
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+
+
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content" style="width:590px">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title"></h4>
+      </div>
+      <div class="modal-body">       
+       <div class="form-group">
+        <table border="1" style="border-collapse: collapse;border-color: grey;font-size: 12px">
+            <thead>
+                <tr>
+                    <th style="background-color: #2255a4;color:white">System ID</th>
+                    <th id="g_user_name"  style="background-color: #2255a4;color:white"></th>
+                    <th style="background-color: #2255a4;color:white">Warranty</th>
+                </tr>
+
+                <tr>
+                    <th>Processor</th>
+                    <td id="g_processor" style="white-space:nowrap;"></td>
+                    <td id="g_processor_rep" style="white-space:nowrap;"></td>
+                </tr>
+
+                <tr>
+                    <th>RAM</th>
+                    <td id="g_ram" style="white-space:nowrap;"></td>
+                    <td id="g_ram_rep" style="white-space:nowrap;"></td>
+                </tr>
+
+                <tr>
+                    <th>HDD/SSD</th>
+                    <td id="g_hdd_ssd" style="white-space:nowrap;"></td>
+                    <td id="g_ssd_rep" style="white-space:nowrap;"></td>
+                </tr>
+
+                <tr>
+                    <th>Monitor</th>
+                    <td id="g_monitor"></td>
+                    <td id="g_monitor_rep"></td>
+                </tr>
+
+                <tr>
+                    <th>Mouse</th>
+                    <td id="g_mouse" style="white-space:nowrap;"></td>
+                    <td id="g_mouse_rep" style="white-space:nowrap;"></td>
+                </tr>
+
+                <tr>
+                    <th>Keyboard</th>
+                    <td id="g_keyboard" style="white-space:nowrap;"></td>
+                    <td id="g_keyboard_repr" style="white-space:nowrap;"></td>
+                </tr>
+
+                <tr>
+                    <th>Operating System</th>
+                    <td id="g_os" style="white-space:nowrap;"></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <th>UPS</th>
+                    <td id="g_ups" style="white-space:nowrap;"></td>
+                    <td id="g_ups_rep" style="white-space:nowrap;"></td>
+                </tr>
+
+              <!--   <tr>
+                    <th>SMPS</th>
+                    <td id="g_smps"></td>
+                    <td id="g_smps_rep"></td>
+                </tr> -->
+
+                <tr>
+                    <th>Location</th>
+                    <td id="g_location"></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <th>Assign to ?</th>
+                    <td id="g_assign" style="font-weight: bold"></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <th style="white-space: nowrap;">Date of Purchase</th>
+                    <td></td>
+                    <td id="g_pc" style="white-space: nowrap;"></td>
+                </tr>
+
+                <tr>
+                    <th>Remarks</th>
+                    <td id="g_remarks"></td>
+                    <td></td>
+                </tr>
+
+
+               <!--  <tr>
+                    <td></td>
+                    <td><img id="g_img" style="width: 36px;height: 35px;float: right;margin-right: -145px;"></td>
+                </tr> -->
+            </thead>
+        </table>
+        </div> 
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style type="text/css">
+	#surveys h4 {
+    font-family: Montserrat-Bold;
+    letter-spacing: .1em;
+    margin-top: 16px;
+    margin-bottom: 8px;
+}
+
+#surveys h4 {
+    text-transform: uppercase;
+    color: #555555;
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 1.1;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#surveys .sub-title {
+    margin-bottom: 16px;
+    margin-top: 0px;
+    color: #777777;
+    font-size: 14px;
+    font-family: inherit;
+    font-weight: 800;
+    line-height: 1.1;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#surveys .survey-item {
+    float: left;
+    width: 19.2%;
+    display: block;
+    margin: 5px 0.8% 5px 0;
+    border-radius: 7px 7px 6px 6px;
+    border-width: 1px;
+    border-style: solid;
+    position: relative;
+    cursor: pointer;
+    background-color: #FFFFFF;
+    border-color: #dddddd;
+    -moz-box-shadow: 0 2px 0 0 #cccccc;
+    -webkit-box-shadow: 0 2px 0 0 #cccccc;
+    box-shadow: 0 2px 0 0 #cccccc;
+    font-family: Arial, Helvetica, sans-serif;
+    height: 100%;
+    overflow-y: visible;
+    background-color: #FFFFFF;
+    -webkit-font-smoothing: antialiased;
+    font-size: 14px;
+    line-height: 1.42857;
+    color: #333333;
+    background-color: #fff;
+}
+
+#surveys .survey-item {
+    float: left;
+    width: 19.2%;
+    display: inline-block;
+    margin: 5px 0.8% 5px 0;
+    border-radius: 7px 7px 6px 6px;
+    border-width: 1px;
+    border-style: solid;
+    position: relative;
+    cursor: pointer;
+    background-color: #FFFFFF;
+    border-color: #dddddd;
+    -moz-box-shadow: 0 2px 0 0 #cccccc;
+    -webkit-box-shadow: 0 2px 0 0 #cccccc;
+    box-shadow: 0 2px 0 0 #cccccc;
+}
+
+#offers .note, #surveys .note {
+    display: none;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 0.625em;
+    position: absolute;
+    right: -0.5em;
+    line-height: 2;
+    border-left-width: 10px;
+    border-left-style: solid;
+    border-right-width: 5px;
+    border-right-style: solid;
+    color: #139493;
+    background-color: #a5e2e1;
+    border-left-color: #a5e2e1;
+    border-right-color: #a5e2e1;
+    box-shadow: 0 1px 0 0 #dddddd;
+    -moz-box-shadow: 0 1px 0 0 #dddddd;
+    -webkit-box-shadow: 0 1px 0 0 #dddddd;
+}
+
+#surveys .reward-box {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: normal;
+    font-size: 10px;
+    /*padding: 10.2px;*/
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    background-color: #28b779;
+}
+
+#surveys .reward-box .amount {
+    color: #f6fcfc;
+    position: relative;
+    width: 100%;
+    display: inline-block;
+    letter-spacing: 0.0125em;
+    white-space: nowrap;
+    margin: 0 0 10px;
+    margin-bottom: 0;
+
+}
+
+#surveys .reward-box .value {
+    font-size: 12px;
+    font-weight: normal;
+    vertical-align: sub;
+    margin: 3%;
+    display: inline-block;
+    padding-bottom: .5em;
+}
+
+#surveys .reward-box .currency {
+    color: #d1f0f0;
+    position: relative;
+    /*width: 50%;*/
+    vertical-align: middle;
+    text-align: right;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 11px;
+    display: inline-block;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-height: 2.8em;
+    white-space: normal;
+}
+
+#surveys .loi-box {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 0.75em;
+    text-transform: capitalize;
+    text-indent: -2em;
+}
+
+#surveys .loi-box .duration {
+    vertical-align: middle;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: normal;
+    font-size: 12px;
+    padding: 8px 0;
+    text-transform: capitalize;
+    text-indent: -2em;
+    color: #888888;
+    line-height: 16.8px;
+    letter-spacing: .01em;
+}
+
+#reward-box {
+    padding: 0px;
+}
+
+#surveys .reward-box i {
+    color: #4ac5c4;
+    margin-right: -3px;
+    font-size: 1.3em;
+    vertical-align: middle;
+    display: inline;
+    letter-spacing: 0.0125em;
+    white-space: nowrap;
+    /*margin-bottom: 1em;*/
+}
+
+#intro-description {
+    width: 50% !important;
+}
+
+#surveys-list-container {
+    display: block;
+    float: left;
+    width: 100%;
+    position: relative;
+    margin-bottom: 16px;
+}
+</style>
+
+
+<!-- <div class="col-md-6 col-lg-2 col-xlg-3">
+                        <div class="card card-hover">
+                            <div class="box bg-danger text-center">
+                                <h1 class="font-light text-white"><i class="mdi mdi-border-outside"></i></h1>
+                                <h6 class="text-white">Tables</h6>
+                            </div>
+                        </div>
+                    </div> -->
+
+
+<!--     <div class="container-fluid" style="display: {{show}}">                
+        <div class="row">                    
+            <div class="col-md-12 col-lg-12 col-xlg-12">
+                <div class="card card-hover">
+                    <div class="box bg-cyan text-center">
+                       
+                       <h6 class="text-white">Audit Entry (Pending)</h6>
+                       <table class="table table-bordered" id="pwd_tracker" style="width:100%">
+                           <thead style="color:white">
+                               <th>ID</th>
+                               <th>User Name</th>
+                               <th>Status</th>
+                           </thead>
+                           {% for x in final_arr %}
+                           <tr>
+                            <td>{{forloop.counter}}</td>
+                            <td>{{x.user_name}} </td>
+                            <td style="color:{{x.color}}"><b><i class="{{x.status}}" aria-hidden="true"></i></b></td>
+                           </tr>
+                          {%endfor%}
+                       </table>
+                    </div>
+                </div>
+            </div>                   
+        </div>
+    </div> --> 
+</center>
+
+<script type="text/javascript">
+  // $(document).ready(function(){
+  //   $.ajax({
+  //     url: '/audit/refresh_weekly_entry/',
+  //     dataType: 'JSON',
+  //     type: 'GET',
+  //     data:
+  //     { 
+               
+  //     },
+
+  //     success : function(obj){           
+               
+  //     },
+  //     error : function(err){
+  //       console.log(JSON.stringify(err,null,4));
+  //     }        
+  //   });
+  // })
+
+
+
+
+  $('.edit').click(function(){
+    var user_id = $(this).attr('id');
+    $.ajax({
+      url: '/audit/get_configuration_details/',
+      dataType: 'JSON',
+      type: 'GET',
+      data:
+      { 
+        'user_id' : user_id,      
+      },
+
+      success : function(obj){   
+        console.log(obj['config_array'])   
+        
+        $('#g_processor').html(obj['config_array'][0]['info_processor'])
+        $('#g_ram').html(obj['config_array'][0]['info_ram'])
+        
+        $('#g_hdd_ssd').html(obj['config_array'][0]['info_hdd'])
+        $('#g_monitor').html(obj['config_array'][0]['info_monitor'])
+
+        $('#g_keyboard').html(obj['config_array'][0]['info_keyboard'])
+        $('#g_mouse').html(obj['config_array'][0]['info_mouse'])
+
+        $('#g_os').html(obj['config_array'][0]['info_operating_sys'])
+        $('#g_user_name').html(obj['config_array'][0]['user_name'])
+        $('#g_ups').html(obj['config_array'][0]['info_smps'])
+        $('#g_location').html(obj['config_array'][0]['location']) 
+
+        //$('#g_smps').html(obj['config_array'][0]['info_smps'])    
+        
+        
+       //$("#g_img").attr("src",obj['config_array'][0]['img']);
+       $('#g_assign').html(obj['config_array'][0]['assgined_for'])
+
+       $('#g_ups_rep').html(obj['config_array'][0]['ups_rep'])
+       $('#g_mouse_rep').html(obj['config_array'][0]['mouse_rep'])
+       $('#g_ssd_rep').html(obj['config_array'][0]['ssd_rep'])
+       $('#g_ups_rep').css('background-color',obj['config_array'][0]['color_ups'])
+       $('#g_mouse_rep').css('background-color',obj['config_array'][0]['color_mouse'])
+
+       $('#g_ssd_rep').css('background-color',obj['config_array'][0]['color_ssd'])
+       $('#g_pc').css('background-color',obj['config_array'][0]['color_pc'])
+       $('#g_pc').html(obj['config_array'][0]['pc_rep'])
+
+       $('#g_keyboard_repr').html(obj['config_array'][0]['kb_rep'])       
+       $('#g_keyboard_repr').css('background-color',obj['config_array'][0]['color_kb'])
+
+       $('#g_monitor_rep').html(obj['config_array'][0]['monitor_rep'])
+       $('#g_monitor_rep').css('background-color',obj['config_array'][0]['color_monitor'])
+       
+
+       $('#g_ram_rep').html(obj['config_array'][0]['ram_rep'])
+       $('#g_ram_rep').css('background-color',obj['config_array'][0]['color_ram'])
+       $('#g_remarks').html(obj['config_array'][0]['remarks'])
+
+       $('#g_processor_rep').html(obj['config_array'][0]['processor_rep'])
+       $('#g_processor_rep').css('background-color',obj['config_array'][0]['color_processor'])
+
+
+
+      },
+      error : function(err){
+        console.log(JSON.stringify(err,null,4));
+      }        
+    });
+    
+  })  
+</script>
+
+{% endblock %}

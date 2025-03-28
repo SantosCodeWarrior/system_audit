@@ -1,0 +1,443 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+<style type="text/css">
+	/*.modal-content {		
+    	width: 200%;
+    	margin-left: -219px;
+	}*/
+
+	#myModalw.modal-content {		
+    	width: 20%;
+    	margin-left: -219px;
+	}
+
+#layout_model{
+		width: 100%;
+    	margin-left: 0px;
+}
+
+</style>
+
+<script type="text/javascript">
+/*	var table3 = $('#other_details').DataTable( {
+    scrollY:        "100px",
+    scrollX:        true,
+    scrollCollapse: false,
+    paging:         false,
+   
+    
+})*/;
+</script>
+
+<!-- Material unchecked -->
+
+
+ <div class="card">
+    <div class="card-body">
+		<div class="col-md-12">   
+			<a href="/audit/system_wfh/" target="_blank"><Button style="float:right" class="btn btn-success">Work From Home</button></a>
+			<button style="cursor: pointer;float:right;display: none;" data-toggle="modal" data-target="#myModal2" class="btn btn-danger">Other System</button>
+			<h3 id="header"><center>WEEKLY IT MAINTENANCE MONITORING</center></h3>
+			<div class="container">
+			    <div class="row">
+			    <div class="table-responsive">
+			        <div class="col-md-12">
+			        <button class="btn btn-success" id="export_excel">EXPORT</button>   
+			        <button class="btn btn-success" id="export_password_share" style="display: none;">Export Password</button><br><p>&nbsp;</p>        
+			        
+			        <label>Date Select <i style="color: grey">(for export):</i></label><select id="audit_date" class="form-control"></select><br>
+			        <table  class="table table-striped table-bordered " id="audit_tracker" style="width:100%">
+			        	<thead style="background-color: #28b779;color:white">
+			        		<th>S.No</th>
+			        		<th style="white-space:nowrap;">User Name</th>
+			        		<th style="white-space:nowrap;">Entry Date</th>
+			        		<th style="white-space:nowrap;">Boot Time</th>
+			        		<th style="white-space:nowrap;">Unused program removed?</th>
+			        		<th style="white-space:nowrap;">Temp files removed? Includes .tmp & .chk files</th>
+							<th style="white-space:nowrap;">Latest anti-virus update 1 day old?</th>
+							<th style="white-space:nowrap;">History & Cache file cleaned up?</th>
+							<th style="white-space:nowrap;">NAS/Server folder connectivity (Yes/No)</th>
+							<th style="white-space:nowrap;">Internet Connectivity (Yes/No)</th>
+							<th style="white-space:nowrap;">Headphone (Yes/No)</th>
+							<th style="white-space:nowrap;">Assigned to (Headphone)</th>
+							<th style="white-space:nowrap;">Location</th>
+							<th style="white-space:nowrap;">Who use System ?</th>
+							<th style="white-space:nowrap;">E-mail Configured</th>
+							<th style="white-space:nowrap;">Printer Connectivity (Yes/No)</th>
+							<th style="white-space:nowrap;">Assigned to</th>
+							<th style="white-space:nowrap;">Issue, if any (User Excel comment)</th>
+							<th></th>
+			        	</thead>
+			        	<tbody id="audit_body">
+			        		
+
+			        </table>
+			        </div>	       
+			    </div>
+
+			    </div>
+			</div>	
+		</div>
+	</div>
+</div>
+
+
+<div id="myModal" class="modal fade" role="dialog" style="width: 100%">
+  <div class="modal-dialog">    
+    <div class="modal-content" style="width: 195%;margin-left: -165px;">
+      <div class="modal-header">        
+        <h4 class="modal-title">User's System Information</h4>
+      </div>
+      <center><div id="info_user_name"></div></center>
+      <div class="modal-body">
+        <div class="form-group">
+	     <table class="table table-striped table-bordered" id="other_details">
+	     	<thead style="text-align: center;background-color: #28b779;color:white;font-weight: bold">
+	     		<th>Processor</th>
+	     		<th>HDD</th>
+	     		<th>RAM</th>
+	     		<th>Mouse</th>
+	     		<th>Keyboard</th>
+	     		<th>UPS</th>
+	     		<th>Monitor</th>
+	     		<th>Operating System</th>
+	     		<th></th>
+	     		<th>Remarks</th>
+	     	</thead>
+	     	<tbody id="info_details"></tbody>
+	     </table>
+	     <div id="assigned_for"></div>	     
+	    </div>
+	    <img id="img_details" style="width: 80px;float: right;margin-top: -20px;">	
+		
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="refresh">Close</button>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+</div>
+
+
+<div id="myModal2" class="modal fade" role="dialog" style="width: 100%">
+  <div class="modal-dialog">    
+    <div class="modal-content" id="layout_model">
+      <div class="modal-header">        
+        <h4 class="modal-title">Other Information</h4>
+      </div>
+      <center><div id="info_user_name"></div></center>
+      <div class="modal-body">
+        <div class="form-group">
+	     <table class="table table-striped table-bordered" id="other_details">
+	     	<thead style="text-align: center;background-color: #28b779;color:white;font-weight: bold">
+	     		<th>S.No</th>	
+	     		<th>Items</th>	     		
+	     		<th>Label</th>
+	     		<th>Status</th>
+	     	</thead>
+	     	<tbody>
+	     		{% for x in equip_array %}
+	     		<tr>
+	     			<td>{{forloop.counter}}</td>
+	     			<td>{{x.items}}</td>
+	     			<td>{{x.label}}</td>
+	     			<td><center><i class="{{x.iconx}}" style="color:{{x.bgcolor}}"></i></center></td>
+	     			{% endfor %}
+	     		</tr>
+	     		
+	     	</tbody>
+	     </table>	     
+	    </div>
+	    <img id="img_details" style="width: 80px;float: right;margin-top: -20px;">	
+		
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="refresh">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+
+<div id="myModalw" class="modal fade" role="dialog">
+  <div class="modal-dialog">    
+    <div class="modal-content" style="width: 557px;">
+      <div class="modal-header">        
+        <!-- <h4 class="modal-title">Information</h4> -->
+      </div>
+      <center><div id="info_user_name"></div></center>
+      <div class="modal-body">
+        <div class="form-group">
+	     <table border="1" style="border-collapse: collapse;width: 100%;" id="alert_list">
+			<thead style="text-align: center;background-color: orange;color: white;font-size: 12px">
+			  <tr>
+			    <th colspan="2">System Performance<br><div id="e_audited"></div></th>
+			  </tr>
+			</thead>
+			<tbody>
+			  <tr>
+			    <td style="text-align:left;background-color: #9adaf5;color: blue;font-size: 12px;font-weight: bold">System ID</td>
+			    <td style="text-align:left;background-color: #b6bcbf;color: blue;font-size: 12px" id="e_user_name"></td>
+			  </tr>
+			  <tr>
+			    <td style="text-align:left;background-color: #9adaf5;color: blue;font-size: 12px">Latest anti-virus update 1 day old?</td>
+			    <td style="text-align:left;background-color: #b6bcbf;color: blue;font-size: 12px" id="e_virus"></td>
+			  </tr>
+			  <tr>
+			    <td style="text-align:left;background-color: #9adaf5;color: blue;font-size: 12px">History &amp; Cache file cleaned up?</td>
+			    <td style="text-align:left;background-color: #b6bcbf;color: blue;font-size: 12px" id="e_cache"></td>
+			  </tr>
+			  <tr>
+			    <td style="text-align:left;background-color: #9adaf5;color: blue;font-size: 12px">Server folder connectivity (Yes/No)</td>
+			    <td style="text-align:left;background-color: #b6bcbf;color: blue;font-size: 12px" id="e_server"></td>
+			  </tr>
+			  <tr>
+			    <td style="text-align:left;background-color: #9adaf5;color: blue;font-size: 12px">Internet Connectivity (Yes/No)</td>
+			    <td style="text-align:left;background-color: #b6bcbf;color: blue;font-size: 12px" id="e_internet"></td>
+			  </tr>
+			  <tr>
+			    <td style="text-align:left;background-color: #9adaf5;color: blue;font-size: 12px">Printer Connectivity (Yes/No)</td>
+			    <td style="text-align:left;background-color: #b6bcbf;color: blue;font-size: 12px" id="e_printer"></td>
+			  </tr>
+			  <tr>
+			    <td style="text-align:left;background-color: #9adaf5;color: blue;font-size: 12px">Headphone</td>
+			    <td style="text-align:left;background-color: #b6bcbf;color: blue;font-size: 12px" id="e_headphone"></td>
+			  </tr>
+			  <tr>
+			    <td style="text-align:left;background-color: #9adaf5;color: blue;font-size: 12px">Thunderbird's size</td>
+			    <td style="text-align:left;background-color: #b6bcbf;color: blue;font-size: 12px;color: red" id="e_size"></td>
+			  </tr>
+			  <tr style="display: none;">
+			    <td style="text-align:left;background-color: #9adaf5;color: blue;font-size: 12px">UPS</td>
+			    <td style="text-align:left;background-color: #b6bcbf;color: blue;font-size: 12px" id="e_ups"></td>
+			  </tr>
+			  <tr>
+			    <td style="text-align:left;background-color: #9adaf5;color: blue;font-size: 12px">Assigned to?</td>
+			    <td style="text-align:left;background-color: #b6bcbf;color: blue;font-size: 12px" id="e_assigned_to"></td>
+			  </tr>
+			  <tr>
+			    <td colspan="2" style="font-size: 10px;background-color: #e9f2f5" id="e_remarks"><br>Must be less than&nbsp;&nbsp;40GB</td>
+			  </tr>
+			</tbody>
+			</table> 
+
+	    </div>
+	    <img id="img_details" style="width: 80px;float: right;margin-top: -20px;">	
+		
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="refresh">Close</button>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+</div>
+
+
+
+<script type="text/javascript">
+load_select_date();
+	$('#export_excel').click(function(){
+		var entry_date = $('#audit_date').val();
+		$.ajax({
+	      url: '/audit/export_tracker/',
+	      dataType: 'JSON',
+	      type: 'GET',
+	      data:
+	      { 
+	        'entry_date' :  JSON.stringify(entry_date)
+	      },
+	      success : function(obj){
+	      	location.href = "/audit/weekly_audit_export/";
+	      	
+	      },
+	      error : function(err){
+	       //console.log(JSON.stringify(err,null,4));
+	      }        
+	    });	    
+	})
+
+
+function load_select_date(){		
+	$.ajax({
+      url: '/audit/load_selected_date/',
+      dataType: 'JSON',
+      type: 'GET',
+      data:
+      { 
+        
+      },
+      success : function(obj){
+      	//$('#audit_date').append('<option id="0">Select Date</option>')
+      	for(var i=0;i<obj['cal_details'].length;i++){
+      		$('#audit_date').append('<option id='+obj['cal_details'][i]['date_filter']+'>'+obj['cal_details'][i]['date_filter']+'</option>')
+      	}            	
+      },
+      error : function(err){
+        console.log(JSON.stringify(err,null,4));
+      }        
+    });	    
+}
+
+
+$(document).ready(function(){	
+	var selected_date = $('#audit_date').val();	
+	load_weekly_details(0);	
+
+})
+
+
+$(document).on('change','#audit_date',function(){ 
+  	var selected_date = $('#audit_date').val();  	
+  	load_weekly_details(selected_date);
+  });
+
+ function load_weekly_details(date){ 	
+ 	var selected_date = $('#audit_date').val();
+ 	if ($.fn.DataTable.isDataTable('#audit_tracker')){
+    $('#audit_tracker').DataTable().destroy();
+  }
+ 	$.ajax({
+	      url: '/audit/selected_date_view_audit/',
+	      dataType: 'JSON',
+	      type: 'GET',
+	      data:
+	      { 
+	        'selected_date' : selected_date,
+	      },
+	      success : function(obj){
+
+	      		
+		    $('#audit_body').empty();
+		    for(var i=0;i<obj['weekly_array'].length;i++){
+		    	$('#audit_body').append('<tr style="background-color:'+obj['weekly_array'][i]['bg_color']+'"><td>'+(i+1)+'</td><td id='+obj['weekly_array'][i]['user_id']+'><u style="cursor: pointer"  data-toggle="modal" data-target="#myModal" class="info_user" value='+obj['weekly_array'][i]['user_id']+'>'+obj['weekly_array'][i]['user_name']+'</u></td><td style="white-space:nowrap">'+obj['weekly_array'][i]['entry_date']+'</td><td>'+obj['weekly_array'][i]['boot_time']+'</td><td>'+obj['weekly_array'][i]['unused_program']+'</td><td>'+obj['weekly_array'][i]['temp_file']+'</td><td>'+obj['weekly_array'][i]['up_antivirus']+'</td><td>'+obj['weekly_array'][i]['history_clean']+'</td><td>'+obj['weekly_array'][i]['server_folder']+'</td><td>'+obj['weekly_array'][i]['internet_conn']+'</td><td>'+obj['weekly_array'][i]['head_phone']+'</td><td>'+obj['weekly_array'][i]['other_items']+'</td><td>'+obj['weekly_array'][i]['department']+'</td><td>'+obj['weekly_array'][i]['use_system']+'</td><td style="white-space:nowrap;">'+obj['weekly_array'][i]['email_configure']+'</td><td>'+obj['weekly_array'][i]['printer_conn']+'</td><td style="white-space:nowrap;text-transform:capitalize">'+obj['weekly_array'][i]['assigned_to']+'</td><td style="white-space:nowrap;">'+obj['weekly_array'][i]['issue_any']+'</td><td><u data-toggle="modal" data-target="#myModalw"  class="btn_alert" id="'+obj['weekly_array'][i]['userID']+'" style="cursor: pointer;">Alert</u></td></tr>')
+
+ 				
+		    	
+
+
+ 				$('.info_user').click(function(){
+					var userID = $(this).attr('value');	
+					
+					$.ajax({
+				      url: '/audit/view_system_configuration/',
+				      dataType: 'JSON',
+				      type: 'GET',
+				      data:
+				      { 
+				        'userID'  : JSON.stringify(userID),	     
+				      },
+				      success : function(obj){
+				      	
+				      	
+				      	$('#info_details').empty();
+				      	for (var i=0;i<obj['weekly_array'].length;i++){
+				      		if(obj['weekly_array'][i]['serial_no']==null){
+				      			serial_no = '';
+				      		}else{
+				      			serial_no = obj['weekly_array'][i]['serial_no'];
+				      		}
+				      		$('#info_details').append('<tr style="background-color:white"><td>'+obj['weekly_array'][i]['info_processor']+'</td><td>'+obj['weekly_array'][i]['info_hdd']+'</td><td>'+obj['weekly_array'][i]['info_ram']+'</td><td>'+obj['weekly_array'][i]['info_mouse']+'</td><td>'+obj['weekly_array'][i]['info_keyboard']+'</td><td>'+obj['weekly_array'][i]['info_smps']+'</td><td>'+obj['weekly_array'][i]['info_monitor']+'</td><td>'+obj['weekly_array'][i]['info_operating_sys']+'</td><td><img src='+obj['weekly_array'][i]['k_img']+' style="width: 100px;height: 107px;"><br>'+serial_no+'</td><td>'+obj['weekly_array'][i]['info_remarks']+'</td></tr>')
+				      	}
+
+				      	$('#info_user_name').text(obj['weekly_array'][0]['user_name'])	
+				      	$('#info_user_name').css('font-weight','bold');				      	
+				      	$("#img_details").attr("src",obj['weekly_array'][0]['img']);
+				      	if(obj['weekly_array'][0]['assgined_for']!=null){
+					      	$('#assigned_for').html('<b>Assigned to </b>' +obj['weekly_array'][0]['assgined_for']);
+					      }else{
+					      	$('#assigned_for').html('');
+					    }
+				      },
+				      error : function(err){
+				        console.log(JSON.stringify(err,null,4));
+				      }        
+				    });
+				})
+
+		    }
+			$('.btn_alert').click(function(){
+	    		var userID = $(this).attr('id');	
+	    		$.ajax({
+			      url: '/audit/get_alert_system/',
+			      dataType: 'JSON',
+			      type: 'GET',
+			      data:
+			      { 
+			        'userID'  : JSON.stringify(userID),	     
+			      },
+			      success : function(obj){			      	
+			      	$('#e_user_name').html(obj[0]['user_name']);
+			      	$('#e_virus').html(obj[0]['e_virus'])
+					$('#e_cache').html(obj[0]['e_cache']);
+					$('#e_server').html(obj[0]['e_server']);
+					$('#e_internet').html(obj[0]['e_internet']);
+					$('#e_printer').html(obj[0]['e_printer']);
+					$('#e_headphone').html(obj[0]['e_headphone']);
+					$('#e_size').html(obj[0]['e_size']);
+					$('#e_remarks').html(obj[0]['e_remarks']);
+					$('#e_assigned_to').html(obj[0]['e_assigned_to']);	
+					$('#e_audited').html('on '+obj[0]['e_audited']+' audited');
+					$('#e_audited').css('color','blue');
+					$('#e_audited').css('font-weight','normal');
+					$('#e_audited').css('font-size','12px');	      	
+			      	
+			      },
+			      error : function(err){
+			       console.log(JSON.stringify(err,null,4));
+			      }        
+			    });
+	    	})
+
+		    var table2 = $('#audit_tracker').DataTable( {
+            scrollY:        "400px",
+            scrollX:        true,
+            scrollCollapse: false,
+            paging:         false,  
+           
+        });
+      },
+      error : function(err){
+      	alert('No Data');
+      	$('#audit_body').empty();
+        //console.log(JSON.stringify(err,null,4));
+      }        
+    });
+}
+
+
+$('#export_password_share').click(function(){
+	var entry_date = $('#audit_date').val();
+	$.ajax({
+      url: '/audit/export_password_share/',
+      dataType: 'JSON',
+      type: 'GET',
+      data:
+      { 
+        'entry_date' :  JSON.stringify(entry_date)
+      },
+      success : function(obj){
+      	location.href = "/audit/download_password_share/";
+      	
+      },
+      error : function(err){
+       //console.log(JSON.stringify(err,null,4));
+      }        
+    });  
+})
+
+	
+</script>
+
+{% endblock %}
+
+
+
+
+

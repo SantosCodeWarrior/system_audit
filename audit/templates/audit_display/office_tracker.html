@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+<script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+
+<style type="text/css">
+	table td tr th {
+		font-size: 12px;
+	}
+</style>
+<div class="card-body">
+	<div class="col-md-12">
+	   	<div class="box-header">
+	      <h3 class="box-title">Office 365 Tracker </h3>
+	    </div>
+
+	    <table  class="table table-striped table-bordered table-sm" cellspacing="0"  width="50%" style="font-size: 12px">
+			<thead>
+			  <tr>
+			    <th>User3-office-365@bwesglobal.com</th>
+			    <th><b>{{total_office3}}/{{subtr_office3}}</b></th>
+			    <th>User5-office-365@bwesglobal.com</th>
+			    <th><b>{{total_office5}}/{{subtr_office5}}</b></th>
+			    <th>bossops@bwesglobal.com</th>
+			    <th><b>{{total_office}}/{{subtr_office}}</b></th>
+			  </tr>
+			</thead>
+			<tbody>
+			  <tr>
+			    <td>User2.office-365@bwesglobal.com</td>
+			    <td><b>{{total_office2}}/{{subtr_office2}}</b></td>
+			    <td>User7-office-365@bwesglobal.com</td>
+			    <td><b>{{total_office7}}/{{subtr_office7}}</b></td>
+			    <td>User8-office-365@bwesglobal.com</td>
+			    <td><b>{{total_office8}}/{{subtr_office8}}</b></td>
+			  </tr>
+			  <tr>
+			    <td>User4-office-365@bwesglobal.com</td>
+			    <td><b>{{total_office4}}/{{subtr_office4}}</b></td>
+			    <td>user6.office@bwesglobal.com</td>
+			    <td><b>{{total_office6}}/{{subtr_office6}}</b></td>
+			   <!--  <td>user.office-365@bwesglobal.com</td>
+			    <td><b>{{total_office1}}/{{subtr_office1}}</b></td> -->
+			  </tr>
+			  <tr>
+			    <td>Accounts <i>(Only for Accounts Departments)</i></td>
+			    <td><b>{{total_account}}/{{subtr_account}}<sup style="color:red;font-size: 12px">*</sup></b></td>			   
+			  </tr>
+			</tbody>
+		</table>
+
+	    <div class="box-body">
+			<table class="table table-striped table-bordered table-sm" cellspacing="0"  width="100%" id="office_tracker">
+				<thead>
+				  <tr>
+				  	<th>S.N.</th>
+				    <th>System ID</th>
+				    <th>Username</th>
+				    <th>Department</th>
+				    <th>Assigned to</th>
+				    <th></th>
+				  </tr>
+				</thead>
+				{% for e in office365 %}
+				<tbody>
+				<tr>
+					<td>{{forloop.counter}}</td>
+					<td>{{e.user_name}}</td>
+					<td>{{e.offices}}</td>
+					<td>{{e.department}}</td>
+					<td>{{e.assign_to}}</td>
+					<th></th>
+					{% endfor %}
+				</tr>
+				</tbody>				
+			</table>
+		</div>
+	</div>
+</div>
+
+
+
+{% endblock %}
+
+
+
+
+

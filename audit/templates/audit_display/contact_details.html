@@ -1,0 +1,345 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style type="text/css">
+	textarea {
+   resize: none;
+}
+</style>
+
+ <div class="card">
+    <div class="card-body">
+		<div class="col-md-12">   
+			<h3 id="header"><center>Emergency Contact</center></h3>	
+			<div class="container">
+			    <div class="row">
+			        <div class="col-md-12">
+					    <div class="input-group">
+					      <span class="input-group-addon" style="width:20%" >Name</span>
+					      <input id="e_user_name" type="text" class="form-control col-md-9" onkeydown="upperCaseF(this)">
+					    </div>
+
+					    <div class="input-group">
+					      <span class="input-group-addon" style="width:20%">Contact Number (Mobile)</span>
+					      <input id="e_contact_mobile" type="Number" class="form-control col-md-9">
+					    </div> 
+
+					    <div class="input-group">
+					      <span class="input-group-addon" style="width:20%">Contact Number (Landline)</span>			    
+					      <input id="e_contact_landline" type="Number" class="form-control col-md-9" onkeydown="upperCaseF(this)">
+					    </div> 
+
+					    <div class="input-group">
+					      <span class="input-group-addon" style="width:20%">Department</span>			    
+					      <input id="e_department" type="text" class="form-control col-md-9" onkeydown="upperCaseF(this)">
+					    </div> 
+
+					    <div class="input-group">
+					      <span class="input-group-addon" style="width:20%">Address</span>			    
+					      <input id="e_address" type="text" class="form-control col-md-9" onkeydown="upperCaseF(this)">
+					    </div>
+
+					    <div class="input-group">
+					      <span class="input-group-addon" style="width:20%">Remarks</span>
+					       <textarea id="e_remark" rows="4" cols="60"></textarea>
+					    </div>
+
+					    <p></p>
+
+					    <div class="container" style="margin-left: 188px;">
+						    <div class="row">
+						        <div class="col-xs-9">
+						            <button class="btn btn-success col-md-12" id="submit_user">Submit</button>
+						        </div>
+						        &nbsp;&nbsp;
+						        <div class="col-xs-9">
+						            <button class="btn btn-warning  col-md-12" id="export">EXPORT</button>
+						        </div>
+						    </div>
+						</div>
+			        </div>	       
+			    </div>
+			</div>	
+		</div>
+	</div>
+
+
+
+
+    <div class="card-body">
+		<div class="col-md-12">
+		    <div class="box-header">
+		      <h3 class="box-title">Contact Details </h3>
+		    </div>
+		    <div class="box-body">
+		      <table  class="table table-striped table-bordered table-sm" cellspacing="0"  width="100%"" id="user_details">
+		        <thead>
+		          <tr>
+		            <th class="th-sm">S.No</th>		            
+		            <th class="th-sm">Name</th>
+		            <th class="th-sm">Contact Number (Mobile)</th>
+		            <th class="th-sm">Contact Number (Landline)</th>
+		            <th class="th-sm">Department</th>
+		            <th class="th-sm">Address</th>
+		            <th class="th-sm">Remarks</th>		            
+		            <th class="th-sm">Edit</th>		           
+		          </tr>
+		        </thead>
+		        <tbody>
+		        	{% for x in info_array %}
+		        	<tr>		        	
+		        	<td class="id">{{x.id}}</td>
+		        	<td class="user_name">{{x.user_name}}</td>
+					<td class="contact_mobile">{{x.contact_mobile}}</td>
+					<td class="contact_landline">{{x.contact_landline}}</td>
+					<td class="department">{{x.department}}</td>		
+					<td class="address">{{x.address}}</td>							
+					<td class="remark">{{x.remarks}}</td>					
+					<td><button class="edit btn btn-success edit_info" data-toggle="modal" data-target="#myModal">Edit</button></td>
+		        	{% endfor %}
+		        	</tr>
+		        </tbody>		        
+		      </table>
+		    </div>
+		</div>
+	</div>
+</div>
+
+
+
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+   
+    <div class="modal-content">
+      <div class="modal-header">
+
+       
+        <h4 class="modal-title">User's System Information</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+	      <label for="gradeName">Name</label>
+	      <input type="text"  class="form-control" id="ee_user_name" onkeydown="upperCaseF(this)">
+	    </div>
+
+	    <div class="form-group">
+	      <label for="gradeName">Contact (Mobile)</label>
+	      <input type="Number"  class="form-control" id="ee_contact_mobile">
+	    </div>
+
+	    <div class="form-group">
+	      <label for="gradeName">Contact (Landline)</label>
+	      <input type="Number"  class="form-control" id="ee_contact_landline">
+	    </div>
+
+	    <div class="form-group">
+	      <label for="gradeName">Department</label>
+	      <input type="text"  class="form-control" id="ee_department">
+	    </div>
+
+	      <div class="form-group">
+	      <label for="gradeName">Address</label>
+	      <input type="text"  class="form-control" id="ee_address">
+	    </div>	    
+
+	    <div class="form-group">
+	      <label for="gradeName">Remarks</label>
+	      <textarea id="ee_remarks" rows="2" cols="52"></textarea>
+	    </div>
+
+	    <div id="ee_selectID" style="display: none"></div>
+
+
+	   
+
+		<div class="form-group">
+		<button type="button" class="btn btn-primary" id="update_details">Update</button>
+		</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="refresh">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<script type="text/javascript">
+	$('#submit_user').click(function(){
+	var user 	  			= $('#e_user_name').val();
+	var contact_mobile 		= $('#e_contact_mobile').val();
+	var contact_landline 	= $('#e_contact_landline').val();
+	var address 	  		= $('#e_address').val();
+	var remark    			= $('#e_remark').val();
+	var department    		= $('#e_department').val();
+
+	
+	if(user==''){
+		alert("Please fill up");
+		return;
+	}
+
+		$.ajax({
+	      url: '/audit/submit_contact_entry/',
+	      dataType: 'JSON',
+	      type: 'GET',
+	      data:
+	      { 
+	        'user'       		: user,
+	        'contact_mobile'  	: contact_mobile,
+	        'contact_landline'  : contact_landline,
+	        'address'        	: address,	       
+	        'remark'     		: remark,	
+	        'department'		: department       
+	      },
+	      success : function(obj){
+	      	
+	        if(obj=='done'){
+	        	alert('Done');	        	
+	        	$('#e_user_name').val('');
+	        	location.reload();
+	        }if(obj=='already'){
+	        	alert('Already updated.');
+	        	$('#e_user_name').val('');
+	        }
+	      },
+	      error : function(err){
+	        console.log(JSON.stringify(err,null,4));
+	      }        
+	    });
+	  });
+
+
+	function upperCaseF(a){
+    setTimeout(function(){
+        a.value = a.value.toUpperCase();
+    }, 1);
+}
+
+
+$(".edit_info").click(function() {	
+  var id        		= $(this).closest("tr").find(".id").text();
+  var user_name 		= $(this).closest("tr").find(".user_name").text();
+  var contact_mobile 	= $(this).closest("tr").find(".contact_mobile").text();
+  var contact_landline 	= $(this).closest("tr").find(".contact_landline").text();
+  var address 			= $(this).closest("tr").find(".address").text();  
+  var remark 			= $(this).closest("tr").find(".remark").text();  	
+  var department 		= $(this).closest("tr").find(".department").text();  	
+
+  get_contact_details(id,user_name,contact_mobile,contact_landline,address,remark,department);
+  
+});
+
+
+function get_contact_details(id,user_name,contact_mobile,contact_landline,address,remark,department) {
+	selected_id = id;
+	$("#ee_selectID").val(selected_id);
+	$("#ee_user_name").val(user_name);	
+	$("#ee_contact_mobile").val(contact_mobile);	
+	$('#ee_contact_landline').val(contact_landline);
+	$('#ee_address').val(address);	
+  	$('#ee_remarks').val(remark);
+  	$('#ee_department').val(department);
+  }
+
+  	$('#ee_user_name').css('text-transform','uppercase');
+	$('#ee_address').css('text-transform','uppercase');
+
+
+$('#update_details').click(function(){
+	var ex_selectID      	 = $("#ee_selectID").val();
+  	var ex_user_name     	 = $("#ee_user_name").val();
+	var ex_contact_mobile    = $("#ee_contact_mobile").val();
+	var ex_contact_landline  = $('#ee_contact_landline').val();
+	var ex_address 			 = $('#ee_address').val();
+	var ex_remarks       	 = $('#ee_remarks').val();
+	var ex_department      	 = $('#ee_department').val();
+	
+  	$.ajax({
+	      url: '/audit/update_contact_entry/',
+	      dataType: 'JSON',
+	      type: 'GET',
+	      data:
+	      { 
+	     	'selectID'				: JSON.stringify(ex_selectID),
+			'user'					: JSON.stringify(ex_user_name),
+			'ex_contact_mobile'		: JSON.stringify(ex_contact_mobile),			
+			'ex_contact_landline'	: JSON.stringify(ex_contact_landline),			
+			'ex_address'			: JSON.stringify(ex_address),			
+			'remark'				: JSON.stringify(ex_remarks),
+			'ex_department'			: JSON.stringify(ex_department),
+	      },
+	      success : function(obj){ 
+	        if(obj=='done'){
+	        	alert('Successfully updated.');
+	        	}
+	      },
+	      error : function(err){
+	        console.log(JSON.stringify(err,null,4));
+	      }        
+	    });
+	})
+
+
+
+
+function load_xlsx(){
+ $("#loaders").css('display','');
+   var user_details = $('#user_details').tableToJSON();
+   console.log(user_details)
+   
+    $.ajax({
+      url      : "/audit/export_contact_details/",
+      type     : 'POST',
+      dataType : 'JSON',
+      data :
+      {
+        'user_details' : JSON.stringify(user_details),
+        
+      },
+      success:function(obj){
+        $("#loaders").css('display','none');
+        location.href = "/audit/contact_details_download/";
+
+      },
+      error:function(err){
+        alert(JSON.stringify(err,null,4));
+      }
+  });
+
+}
+
+$('#export').click(function(){   
+    load_xlsx();
+  })
+
+
+
+
+$(document).ready(function () {
+$('#dtVerticalScrollExample').DataTable({
+"scrollY": "100px",
+"scrollCollapse": true,
+});
+$('.dataTables_length').addClass('bs-select');
+});
+</script>
+
+<style type="text/css">
+	table.dataTable thead .sorting:after,
+	table.dataTable thead .sorting:before,
+	table.dataTable thead .sorting_asc:after,
+	table.dataTable thead .sorting_asc:before,
+	table.dataTable thead .sorting_asc_disabled:after,
+	table.dataTable thead .sorting_asc_disabled:before,
+	table.dataTable thead .sorting_desc:after,
+	table.dataTable thead .sorting_desc:before,
+	table.dataTable thead .sorting_desc_disabled:after,
+	table.dataTable thead .sorting_desc_disabled:before {
+	bottom: .5em;
+}
+</style>
+
+{% endblock %}

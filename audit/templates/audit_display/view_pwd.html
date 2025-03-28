@@ -1,0 +1,237 @@
+{% extends "base.html" %}
+{% block content %}
+
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+<script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+
+<style type="text/css">
+	.modal-content {		
+    	width: 173%;
+    	margin-left: -110px;
+	}
+</style>
+
+<!-- Material unchecked -->
+
+
+ <div class="card">
+    <div class="card-body">
+		<div class="col-md-12">   
+			<h3 id="header"><center>View Password</center></h3>
+			<div class="container">
+			    <div class="row">
+			        <div class="col-md-12">
+					    <div class="form-group">
+					       <div class="input-group">
+					      <span class="input-group-addon" style="width:15%">User Name</span>
+					      <select class="form-control" id="user_name">
+                               <option id="0">Select User Name</option>
+                                {% for xx in user_details %}
+                                <option id="{{xx.user_id}}">{{xx.user_name}}</option>
+                                {% endfor %}
+                            </select>
+					    </div>					    
+
+					    <div class="input-group">
+					      <span class="input-group-addon" style="width:15%">View Password</span>
+					      <input id="e_view_pwd" type="text" class="form-control col-md-9">
+					    </div> 
+
+
+					    <div class="input-group" style="display: ">
+					      <span class="input-group-addon" style="width:15%">E-Mail(s)</span>
+					      <input id="e_email" type="mail" class="form-control col-md-9">
+					    </div> 
+
+					    <div class="input-group">
+					      <span class="input-group-addon" style="width:15%">Comments</span>
+					      <textarea id="e_remark" rows="4" cols="80"></textarea>
+					    </div>					    
+			        </div>	       
+						<button class="btn btn-success col-md-4" id="submit_user" style="margin-left: 141px;">Submit</button>
+			    </div>
+			</div>	
+		</div>
+	</div>
+</div>
+
+ <div class="card">
+    <div class="card-body">
+		<div class="col-md-12">  
+		<table class="table table-bordered" id="pwd_tracker" style="width:100%">
+			<thead style="background-color: #28b779;color:white">
+				<th style="display: none;"></th>
+				<th>S.No</th>
+				<th>User Name</th>
+				<th>View Password</th>
+				<th>Generated Date</th>
+				<th>E-mail</th>
+				<th>Comments</th>
+				<th></th>
+			</thead>
+			{% for x in pwd_array %}
+			<tr>
+				<td class="id" style="display:none">{{x.id}}</td>
+				<td>{{forloop.counter}}</td>
+				<td class="user_name">{{x.user_name}}</td>
+				<td class="view_pwd">{{x.view_pwd}}</td>
+				<td class="gen_date">{{x.gen_date}}</td>
+				<td class="ee_mail">{{x.mail_det}}</td>
+				<td class="commnent">{{x.comments}}</td>
+				<td><button class="btn btn-success edit_info" data-toggle="modal" data-target="#myModal" data-dismiss="modal">Edit</button></td>
+			{% endfor %}				
+			</tr>			
+		</table>
+		</div>
+	</div>
+</div>
+
+
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">    
+    <div class="modal-content">
+      <div class="modal-header">        
+        <h4 class="modal-title">View Password</h4>
+      </div>
+      <center><div id="info_user_name"></div></center>
+      <div class="modal-body">
+      <div id="userID" style="display: none"></div>
+      	<div class="form-group">
+	      <label for="gradeName">User Name</label>
+	      <input type="text"  class="form-control" id="ee_user_name" disabled="disabled">
+	    </div>
+
+        <div class="form-group">
+	      <label for="gradeName">View Password</label>
+	      <input type="text"  class="form-control" id="ee_view_password" placeholder="Enter...">
+	    </div>
+
+	    <div class="form-group">
+	      <label for="gradeName">Email</label>
+	      <input type="text"  class="form-control" id="ee_mail" placeholder="Enter...">
+	    </div>
+
+	    <div class="form-group">
+	      <label for="gradeName">Comments</label>
+	      <input type="text"  class="form-control" id="ee_commments" placeholder="Enter...">
+	    </div>
+
+	    <div class="form-group">
+			<button type="button" class="btn btn-primary" id="update_details">Update</button>
+		</div>	  
+		
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="refresh">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+
+
+
+<script type="text/javascript">
+$('#submit_user').click(function(){
+	var user_name  = $('#user_name').val();
+	var e_view_pwd = $('#e_view_pwd').val();
+	var e_remark   = $('#e_remark').val();
+	var e_mail 	   = $('#ee_mail').val(); 
+
+	$.ajax({
+	      url: '/audit/submit_pwd_details/',
+	      dataType: 'JSON',
+	      type: 'GET',
+	      data:
+	      { 
+	     	'e_userName' : JSON.stringify(user_name),
+			'e_view_pwd' : JSON.stringify(e_view_pwd),
+			'e_remark'   : JSON.stringify(e_remark),
+			'e_mail'  	 : JSON.stringify(e_mail),									
+	      },
+	      success : function(obj){
+	        if(obj=='done'){
+	        	alert('Successfully submitted.');
+	        	location.reload();
+	        }
+	        else if (obj=='no'){
+	        	alert('Already submitted.');
+	        	location.reload();
+	        }
+	      },
+	      error : function(err){
+	        alert(JSON.stringify(err,null,4));
+	    }        
+	});
+})
+
+	
+$(".edit_info").click(function() {	
+  var id        = $(this).closest("tr").find(".id").text();
+  var user_name = $(this).closest("tr").find(".user_name").text();
+  var view_pwd 	= $(this).closest("tr").find(".view_pwd").text();
+  var gen_date 	= $(this).closest("tr").find(".gen_date").text();
+  var mail 	    = $(this).closest("tr").find(".mail").text();
+  var comments  = $(this).closest("tr").find(".commnent").text();  
+  get_password_details(id,user_name,view_pwd,mail,comments); 
+  
+});
+
+
+function get_password_details(id,user_name,view_pwd,mail,comments) {	
+	selected_id = id;	
+	$("#userID").text(selected_id);
+	$("#ee_user_name").val(user_name);
+	$("#ee_view_password").val(view_pwd);
+	$("#ee_mail").val(mail);
+	$("#ee_commments").val(comments);
+
+}
+
+
+$('#update_details').click(function(){
+	var ex_userID        = $("#userID").text();
+  	var ex_user_name     = $("#ee_user_name").val();
+	var ex_view_password = $("#ee_view_password").val();
+	var ee_mail	     	 = $('#ee_mail').val();
+	var ex_comments	     = $('#ee_commments').val();
+	
+	
+  	$.ajax({
+	      url: '/audit/update_pwd_details/',
+	      dataType: 'JSON',
+	      type: 'GET',
+	      data:
+	      { 
+	     	'ex_userID'		   : JSON.stringify(ex_userID),
+			'ex_user_name'	   : JSON.stringify(ex_user_name),
+			'ex_view_password' : JSON.stringify(ex_view_password),
+			'ex_mail'  		   : JSON.stringify(ee_mail),
+			'ex_comments'	   : JSON.stringify(ex_comments),					
+	      },
+	      success : function(obj){ 
+	        if(obj=='done'){
+	        	alert('Successfully updated.');
+	        	location.reload();
+	        }
+	      },
+	      error : function(err){
+	        alert(JSON.stringify(err,null,4));
+	      }        
+	    });
+	})
+
+
+	
+</script>
+
+{% endblock %}
+
+
+
+
+

@@ -1,0 +1,439 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style type="text/css">
+	textarea {
+   resize: none;
+}
+</style>
+
+ <div class="card">
+    <div class="card-body">
+		<div class="col-md-12">   
+			<h3 id="header"><center>Asset Registers</center></h3>	
+			<div class="container">
+			    <div class="row">
+			        <div class="col-md-10">
+					    <div class="input-group">
+					      <span class="input-group-addon" style="width:20%" >Asset Name</span>
+					      <!-- <input id="e_asset_name" type="text" class="form-control col-md-9" onkeydown="upperCaseF(this)"> -->
+					      <select id="e_asset_name" class="form-control">
+					      	  <option id="0">Select Asset Name</option>
+						      <option id="e_hdd">HDD</option>
+						      <option id="e_ram">RAM</option>
+						      <option id="e_smps">SMPS</option>
+						      <option id="e_ups">UPS</option>
+						      <option id="e_mouse">MOUSE</option>
+						      <option id="e_keyboard">KEYBOARD</option>
+						      <option id="e_monitor">MONITOR</option>
+						      <option id="e_cpu">CPU</option>	
+						      <option id="e_other">Other</option>						      				    
+					      </select>
+					    </div>
+
+					     <div class="input-group" style="display: none" id="show_other">	
+					     <span class="input-group-addon" style="width:20%">Other</span>				      
+					      <input id="e_any" type="text" class="form-control col-md-9" onkeydown="upperCaseF(this)"> 
+					    </div> 
+
+					    <div class="input-group">
+					      <span class="input-group-addon" style="width:20%">Asset Type</span>
+					      <select id="e_asset_type" class="form-control">
+					      <option id="0">Asset Type</option>
+					      <option id="hardware">Hardware</option>
+					      <option id="software">Software</option>
+					      <option id="fitting">Fitting</option>
+					      </select>
+					    </div> 
+
+					    <div class="input-group">
+					      <span class="input-group-addon" style="width:20%">State</span>			    
+					      <select id="e_state" class="form-control">
+						      <option id="in_store">In Store</option>
+						      <option id="in_use">In Use</option>
+						      <option id="in_repair">In Repair</option>
+						      <option id="in_replace">In Replace</option>
+						      <option id="in_replace">In Expired</option>					    
+					      </select>
+					    </div>  
+
+					    <div class="input-group">
+					      <span class="input-group-addon" style="width:20%">Date of Purchase</span>			    
+					      <input id="e_date_purchase" type="date" class="form-control col-md-9">
+					    </div> 
+
+					    <div class="input-group">
+					      <span class="input-group-addon" style="width:20%">Expiry Date</span>			    
+					      <input id="e_expiry_date" type="date" class="form-control col-md-9">
+					    </div>  
+
+					    <div class="input-group">
+					      <span class="input-group-addon" style="width:20%">Manufacture/Company</span>			    
+					      <input id="e_company" type="text" class="form-control col-md-9" onkeydown="upperCaseF(this)">					     
+					    </div> 
+
+					    <div class="input-group">
+					      <span class="input-group-addon" style="width:20%">Hardware Serial No.</span>			    
+					      <input id="e_serial_no" type="text" class="form-control col-md-9" onkeydown="upperCaseF(this)">					     
+					    </div> 
+
+					    <div class="input-group">
+					      	<span class="input-group-addon" style="width:20%">Asset Registor No.</span>			    
+					    	<input id="e_assigned_to" type="text" class="form-control col-md-9" onkeydown="upperCaseF(this)">				     
+					    </div> 
+
+					    <div class="input-group">
+					      <span class="input-group-addon" style="width:20%">Particular</span>			    
+					      <input id="e_particular" type="text" class="form-control col-md-9" onkeydown="upperCaseF(this)">					     
+					    </div> 
+
+					    <div class="input-group">
+					      <span class="input-group-addon" style="width:20%">Remarks</span>
+					       <textarea id="e_remark" rows="4" cols="60"></textarea>
+					    </div> 
+
+					    <p></p>
+						<button class="btn btn-success col-md-12" id="submit_register">Submit</button>
+			        </div>	       
+			    </div>
+			</div>	
+		</div>
+	</div>
+
+
+
+
+    <div class="card-body">
+		<div class="col-md-12">
+		    <div class="box-header">
+		      <h3 class="box-title">Asset Master Register</h3>
+		    </div>
+		    <div class="box-body">
+		      <table  class="table table-striped table-bordered" id="registor_details" >
+		        <thead style="background-color: #28b779;color:white">
+		          <tr>
+		            <th>Asset ID</th>
+		            <th>Asset Name</th>
+		            <th>Asset Type</th>
+		            <th>State</th>
+		            <th>Particular</th>
+		            <th>Date of Purchase</th>
+		            <th>Expiry Date</th>
+		            <th>Manufacture<br>/Company</th>
+		            <th>Hardware<br>Serial No.</th>
+		            <th>Asset<br> Registor No.</th>
+		            <th>Remarks</th>
+		            <th></th>			           
+		          </tr>
+		        </thead>
+		        <tbody>
+		        <tr>
+		        {% for i in asset_array %}
+		        	<td class="id">{{i.id}}</td>
+		        	<td class="asset_name">{{i.asset_name}}</td>					
+					<td class="asset_type">{{i.asset_type}}</td>
+					<td class="state">{{i.state}}</td>
+					<td class="particular">{{i.particular|default_if_none:""}}</td>
+					<td class="date_purchase">{{i.date_purchase}}</td>
+					<td class="expiry_date">{{i.expiry_date}}</td>
+					<td class="company">{{i.company}}</td>
+					<td class="serial_no" style="text-transform: uppercase;">{{i.serial_no|default_if_none:""}}</td>
+					<td class="assigned_to">{{i.assigned_to}}</td>
+					<td class="remark">{{i.remark}}</td>
+					<td><button class="edit btn btn-success edit_info" data-toggle="modal" data-target="#myModal">Edit</button></td>
+		        </tr>
+		        {% endfor %}		        	
+		        </tbody>		        
+		      </table>
+		    </div>
+		</div>
+	</div>
+</div>
+
+
+
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+        <h4 class="modal-title">System Information</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+	      <label for="gradeName">Asset ID</label>
+	      <input type="text"  class="form-control" id="ee_assetID" disabled="disabled">
+	    </div>
+
+	     <div class="form-group">
+	      <label for="gradeName">Asset ID</label>
+	      <select id="ee_asset_name" class="form-control">
+	      	  <option id="0">Select Asset Name</option>
+		      <option id="e_hdd">HDD</option>
+		      <option id="e_ram">RAM</option>
+		      <option id="e_smps">SMPS</option>
+		      <option id="e_ups">UPS</option>
+		      <option id="e_mouse">MOUSE</option>
+		      <option id="e_keyboard">KEYBOARD</option>
+		      <option id="e_monitor">MONITOR</option>
+		      <option id="e_cpu">CPU</option>	
+		      <option id="e_other">Other</option>						      				    
+	      </select>
+	    </div>   
+
+
+
+	    <div class="form-group">
+	      <label for="gradeName">Asset Type</label>
+	     
+	       <select id="ee_asset_type" class="form-control">
+		      <option id="0">Asset Type</option>
+		      <option id="hardware">Hardware</option>
+		      <option id="software">Software</option>
+		      <option id="fitting">Fitting</option>
+		      </select>
+	    </div>
+
+	      <div class="form-group">
+	      <label for="gradeName">State</label>
+
+	    <div class="form-group">
+	      <label for="gradeName">Particular</label>
+	      <input type="text"  class="form-control" id="ee_particular">
+	    </div>
+	     
+	      <select id="ee_state" class="form-control">
+		      <option id="in_store">In Store</option>
+		      <option id="in_use">In Use</option>
+		      <option id="in_repair">In Repair</option>
+		      <option id="in_replace">In Replace</option>
+		      <option id="in_replace">In Expired</option>					    
+	      </select>
+	    </div>
+
+	     <div class="form-group">
+	      <label for="gradeName">Date of Purchase</label>
+	      <input type="date"  class="form-control" id="ee_purchase_date">
+	    </div>
+
+	      <div class="form-group">
+	      <label for="gradeName">System's Expiry Date</label>
+	      <input type="date"  class="form-control" id="ee_expiry_date">
+	    </div>
+
+	    <div class="form-group">
+	      <label for="gradeName">Manufacture/Company</label>
+	      <input type="text"  class="form-control" id="ee_company">
+	    </div>
+
+
+	     <div class="form-group">
+	      <label for="gradeName">Serial Number</label>
+	      <input type="text"  class="form-control" id="ee_serial_no">
+	    </div>
+
+	     <div class="form-group">
+	      <label for="gradeName">Assigned To </label>
+	      <input type="text"  class="form-control" id="ee_assigned_to">
+	    </div>
+
+	    <div class="form-group">
+	      <label for="gradeName">Remarks</label>
+	      <textarea id="ee_remarks" rows="2" cols="52"></textarea>
+	    </div>
+
+	   
+
+		<div class="form-group">
+		<button type="button" class="btn btn-primary" id="update_details">Update</button>
+		</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="refresh" value="1">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<script type="text/javascript">
+	$('#submit_register').click(function(){  
+
+	var e_asset_name		= $('#e_asset_name').val();
+	var e_asset_type		= $('#e_asset_type').val();
+	var e_state				= $('#e_state').val();
+	var e_date_purchase		= $('#e_date_purchase').val();
+	var e_expiry_date		= $('#e_expiry_date').val();
+	var e_company			= $('#e_company').val();
+	var e_serial_no			= $('#e_serial_no').val();
+	var e_remark			= $('#e_remark').val();
+	var e_assigned_to		= $('#e_assigned_to').val();	
+	
+
+	if(e_asset_name==''){
+		alert("Please fill up");
+		return;
+	}
+
+		$.ajax({
+	      url: '/audit/submit_register/',
+	      dataType: 'JSON',
+	      type: 'GET',
+	      data:
+	      { 
+	        'e_asset_name'  	: JSON.stringify(e_asset_name),
+			'e_asset_type'  	: JSON.stringify(e_asset_type),
+			'e_state'   		: JSON.stringify(e_state),
+			'e_date_purchase'   : JSON.stringify(e_date_purchase),
+			'e_expiry_date'   	: JSON.stringify(e_expiry_date),
+			'e_company'   		: JSON.stringify(e_company),
+			'e_serial_no'   	: JSON.stringify(e_serial_no),
+			'e_remark'   		: JSON.stringify(e_remark),
+			'e_assigned_to'     : JSON.stringify(e_assigned_to),
+			
+			
+	      },
+	      success : function(obj){ 
+	        if(obj=='done'){
+	        	alert('Done');
+	        	$('#e_user_name').val('');
+	        }if(obj=='no'){
+	        	alert('Already updated.');
+	        	$('#e_user_name').val('');
+	        }
+	      },
+	      error : function(err){
+	        console.log(JSON.stringify(err,null,4));
+	      }        
+	    });
+	  });
+
+
+$('#e_asset_name').click(function(){
+	var ott = $(this).val();	
+	if(ott=='Other'){
+	$('#show_other').show();
+	$('#e_assigned_to').val("");		
+	}
+
+	else if(ott=="KEYBOARD"){		
+		$('#e_assigned_to').val('BWTW/KEYBOARD/' )
+	}
+
+	else if(ott=="MOUSE"){		
+		$('#e_assigned_to').val('BWTW/MOUSE/')
+	}	
+
+	else if(ott=="MONITOR"){		
+		$('#e_assigned_to').val('BWTW/MONITOR/')
+	}	
+
+	else if(ott=="UPS"){		
+		$('#e_assigned_to').val('BWTW/UPS/')
+	}
+
+	else if(ott=="CPU"){		
+		$('#e_assigned_to').val('BWTW/CPU/')
+	}
+
+	else{
+		$('#show_other').hide();
+		$('#e_assigned_to').val("");
+	}
+})
+
+function upperCaseF(a){
+    setTimeout(function(){
+        a.value = a.value.toUpperCase();
+    }, 1);
+}
+
+
+$(".edit_info").click(function() {	
+  var id        	= $(this).closest("tr").find(".id").text();
+  var asset_name 	= $(this).closest("tr").find(".asset_name").text();
+  var asset_type 	= $(this).closest("tr").find(".asset_type").text();
+  var state 		= $(this).closest("tr").find(".state").text();
+  var date_purchase = $(this).closest("tr").find(".date_purchase").text();
+  var expiry_date 	= $(this).closest("tr").find(".expiry_date").text();
+  var company 		= $(this).closest("tr").find(".company").text();
+  var serial_no 	= $(this).closest("tr").find(".serial_no").text();
+  var assigned_to 	= $(this).closest("tr").find(".assigned_to").text();
+  var remark 		= $(this).closest("tr").find(".remark").text();
+  var particular 	= $(this).closest("tr").find(".particular").text(); 
+  get_registor_details(id,asset_name,asset_type,state,date_purchase,expiry_date,company,serial_no,assigned_to,remark,particular); 
+  
+});
+
+function get_registor_details(id,asset_name,asset_type,state,date_purchase,expiry_date,company,serial_no,assigned_to,remark,particular) {
+	selected_id = id;	
+	$("#ee_assetID").val(selected_id);
+	$("#ee_asset_name").val(asset_name);	
+	$("#ee_asset_type").val(asset_type);	
+	$('#ee_state').val(state);
+	$('#ee_purchase_date').val(date_purchase);
+	$('#ee_expiry_date').val(expiry_date);
+	$('#ee_company').val(company);
+	$('#ee_serial_no').val(serial_no);
+	$('#ee_remarks').val(remark);	
+  	$('#ee_assigned_to').val(assigned_to);
+  	$('#ee_particular').val(particular);
+  	$('#ee_serial_no').css('text-transform','uppercase');
+  	$('#ee_company').css('text-transform','uppercase');
+
+
+
+}
+
+
+
+$('#update_details').click(function(){
+	var ex_assetID       = $("#ee_assetID").val();
+  	var ex_asset_name    = $("#ee_asset_name").val();
+	var ex_asset_type    = $("#ee_asset_type").val();
+	var ex_state 	     = $('#ee_state').val();
+	var ex_purchase_date = $('#ee_purchase_date').val();
+	var ex_expiry_date   = $('#ee_expiry_date').val();
+	var ex_company       = $('#ee_company').val();
+	var ex_serial_no     = $('#ee_serial_no').val();
+	var ex_remarks       = $('#ee_remarks').val();
+	var ex_assigned_to   = $('#ee_assigned_to').val();
+	var ex_particular	 = $('#ee_particular').val();
+	
+  	$.ajax({
+	      url: '/audit/update_register/',
+	      dataType: 'JSON',
+	      type: 'GET',
+	      data:
+	      { 
+	     	'ex_assetID'		: JSON.stringify(ex_assetID),
+			'ex_asset_name'		: JSON.stringify(ex_asset_name),
+			'ex_asset_type'		: JSON.stringify(ex_asset_type),
+			'ex_state'			: JSON.stringify(ex_state),
+			'ex_purchase_date'	: JSON.stringify(ex_purchase_date),
+			'ex_expiry_date'	: JSON.stringify(ex_expiry_date),
+			'ex_company'		: JSON.stringify(ex_company),
+			'ex_serial_no'		: JSON.stringify(ex_serial_no),
+			'ex_remarks'		: JSON.stringify(ex_remarks),
+			'ex_assigned_to'	: JSON.stringify(ex_assigned_to),	
+			'ex_particular'     : JSON.stringify(ex_particular),			
+	      },
+	      success : function(obj){ 
+	        if(obj=='done'){
+	        	alert('Successfully updated.');
+	        	}
+	      },
+	      error : function(err){
+	        console.log(JSON.stringify(err,null,4));
+	      }        
+	    });
+	})
+
+
+</script>
+
+
+{% endblock %}

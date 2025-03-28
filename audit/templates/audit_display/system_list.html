@@ -1,0 +1,241 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style type="text/css">
+	.hot-display-license-info{
+		display:'none',
+	}
+
+</style>
+
+
+
+<script type="text/javascript">
+function submittab(){
+	//$("#tab_type").button('loading');
+
+	var data 		= tab_table.getData();	
+	data 			= tab_table.getData();	
+	data_cleaned = [];
+	var i = 0;
+	while(true){
+		if(data[i]['name'] != null ){
+		//console.log(data[i]['name'])
+			data_cleaned.push(data[i]['name']);
+			i++;
+		}
+		else{
+			break;
+		}
+	}
+
+
+	
+	$.ajax({
+	    url : "/audit/system_details_entry/",
+	    type : "POST",
+	    dataType : "json",
+	    data : {
+	    	tabs_name: JSON.stringify(data),	    	
+	    	csrfmiddlewaretoken: ''
+	    },
+	    success : function(obj_data){
+	    	//$("#tab_type").button('reset');
+	    	alert(JSON.stringify(obj_data,null,4));
+	    	get_reports()
+	    },
+	    error	: function(err){
+	    	//$("#tab_type").button('reset');
+			console.log(JSON.stringify(err,null,4));
+	    }
+  	});
+
+}
+</script>
+
+<div class = "box box-success">
+    <div class="box-header with-border">
+    <center><h2></h2></center>
+    
+    <div class = "col-md-12" style="height:100%">
+        <div class = 'handsontable' style="height: 600px; overflow: auto; margin-top : 30px;" data-originalstyle="height: 300px; overflow: auto"  id="network_speed_list"></div>
+        <button class="btn btn-success btn-lg btn-block" style = "margin : 20px" id = "tab_type" onclick = "submittab()" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Loading">Submit Report Type</button>
+    </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+	var data = [
+		{
+			s_no 			: '',
+			particulars 	: '',
+			department 		: '',			
+			repaired_date 	: '',
+			purchase_date 	: '',
+			assigned_to   	: '',
+			assigned_date   : '',
+			status 			: '',
+			warranty		: '',
+			brand_name		: '',
+			location		: '',
+			remarks 		: '',			
+
+		}
+	];
+    container     = document.getElementById('network_speed_list');
+  	var tab_table = new Handsontable(container, {
+    
+    minSpareRows: 120,
+    colHeaders: true,
+    stretchH: 'all',
+    colHeaders: ['S.No','Particulars','Department','Repaired Date','Purchase Date','Assigned To','Assigned Date','Status','Warranty','Brand Name','Location','Remarks'],
+    contextMenu: true,
+    dropdownMenu  : true,
+    filters       : true,
+    columnSorting : true,
+
+    columns: [
+    	{	
+    		data: "s_no",
+	    	type : 'text',			
+		    readOnly: true,
+		    renderer: get_status,
+		},
+  	
+	  	{
+	    	data: "particulars",
+	    	type : 'text',	    	
+	    	renderer: get_status,	    	
+	    },
+
+	    {
+	    	data: "department",
+	    	type : 'text',	    	
+	    	renderer: get_status,	    	
+	    },
+
+	    {
+	    	data: "repaired_date",
+	    	type : 'date',
+	    	dateFormat: 'DD-MMM-YYYY',
+	    	renderer: get_status,	    	
+	    },
+
+	    {
+	    	data: "purchase_date",
+	    	type : 'date',
+	    	dateFormat: 'DD-MMM-YYYY',
+	    	renderer: get_status,	    	
+	    },
+
+	    {
+	    	data: "assigned_to",
+	    	type : 'text',
+	    	renderer: get_status,	    	
+	    },
+
+	    {
+	    	data: "assigned_date",
+	    	type : 'date',
+	    	dateFormat: 'DD-MMM-YYYY',
+	    	renderer: get_status,	    	
+	    },
+
+	    {
+	    	data: "status",
+	    	type : 'text',
+	    	renderer: get_status,	    	
+	    },
+
+	    {
+	    	data: "warranty",
+	    	type : 'text',
+	    	renderer: get_status,	    	
+	    },
+
+	    {
+	    	data: "brand_name",
+	    	type : 'text',	    	
+	    	renderer: get_status,    	
+	    },
+
+	    {
+	    	data: "location",
+	    	type : 'text',	    	
+	    	renderer: get_status,	    	
+	    },
+	    
+	    {
+	    	data: "remarks",
+	    	type : 'text',
+	    	renderer: get_status,	    	
+	    }
+
+	  ],
+	  data: data,
+  });
+
+get_reports();
+$('.hot-display-license-info').css('display','none');
+
+function get_reports(){
+	$.ajax({
+		url : "/audit/system_details_list/",
+		type : "POST",
+
+		dataType : "json",
+		data : { 
+			
+		},
+		success : function(obj_data){
+			//console.log(JSON.stringify(obj_data, null, 4));
+			if(obj_data['net_array'].length>0)
+			{
+				tab_table.loadData(obj_data['net_array']);
+				//console.log(obj_data['net_array'])
+			}
+			else
+			{
+			tab_table.loadData(obj_data['net_array']);
+			//console.log(data)
+			}
+		},
+		error: function(err){
+			//alert(JSON.stringify(err,null,4));
+		}
+	});	
+}
+
+
+function colorRenderer3(instance, td, row, col, prop, value, cellProperties) {
+    Handsontable.renderers.TextRenderer.apply(this, arguments);
+    var data = instance.getData();
+    var valueAtC = data[row][8]; 
+   
+    if (valueAtC !='1 day') {
+      td.style.backgroundColor = '';
+    } else {
+      td.style.backgroundColor = '#fc8195';
+    }
+    return td;
+  };
+
+
+
+function get_status(instance, td, row, col, prop, value, cellProperties) {
+    Handsontable.renderers.TextRenderer.apply(this, arguments);
+    var data = instance.getData();
+    var valueAtC = data[row][7]; 
+   
+    if (valueAtC =='Available') {
+      td.style.backgroundColor = '#abfaaa';
+    } else {
+      td.style.backgroundColor = '';
+    }
+    return td;
+  };
+
+</script>
+
+{% endblock %}

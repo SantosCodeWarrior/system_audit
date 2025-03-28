@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+{% block content %}
+
+   <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+    <script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+
+ <div class="card">
+    <div class="card-body">
+		<div class="col-md-12">   
+			<h3 id="header"><center>Assets Register</center></h3>	
+			<div class="container">
+			    <div class="row">
+			    <div class="table-responsive">
+			        <div class="col-md-12">
+			        <table class="table table-striped table-bordered" id="audit_tracker" style="width:100%">
+			        	<thead style="background-color: #28b779;color:white">
+			        		<th>S.No</th>
+			        		<th style="white-space: nowrap;">ID	Type (IT/ Non-IT)</th>
+			        		<th style="white-space: nowrap;">Class - Peripherals/Network/Fittings</th>
+			        		<th>Description</th>
+			        		<th>Location</th>
+			        		<th style="white-space: nowrap;">Parent (only for IT peripherals)</th>
+							<th style="white-space: nowrap;">User Alloted</th>
+							<th style="white-space: nowrap;">Security Level</th>
+							<th style="white-space: nowrap;">Maintenance Schedule</th>
+							<th style="white-space: nowrap;">Last Record Date</th>
+							<th>Remarks</th>
+							
+			        	</thead>
+			        	<tbody id="audit_body">
+			        		{% for z in reg_array %}
+			        		<tr>
+			        			<td>{{forloop.counter}}</td>
+			        			<td style="white-space: nowrap;"><u <u style="cursor: pointer"  data-toggle="modal" data-target="#myModal" class="info_user" value="{{z.userID}}">{{z.audit_key}}</u></td>
+			        			<td style="white-space: nowrap;">{{z.it_non}}</td>
+			        			<td style="white-space: nowrap;">{{z.fitting}}</td>
+			        			<td style="white-space: nowrap;">{{z.description}}</td>
+								<td style="white-space: nowrap;">{{z.location}}</td>
+								<td style="white-space: nowrap;">{{z.user_allotted}}</td>
+								<td style="white-space: nowrap;">{{z.security_level}}</td>
+								<td style="white-space: nowrap;">{{z.maintenance}}</td>
+								<td style="white-space: nowrap;">{{z.register_date}}</td>
+								<td style="white-space: nowrap;">{{z.remark}}</td>															
+			        			{% endfor %}
+			        		</tr>
+			        	</tbody>
+			        </table>
+			        </div>	       
+			    </div>
+			    </div>
+			</div>	
+		</div>
+	</div>
+</div>
+
+
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+        <h4 class="modal-title">User's System Information</h4>
+      </div>
+      <center><div id="info_user_name"></div></center>
+      <div class="modal-body">
+        <div class="form-group">
+	     <table class="table table-striped table-bordered">
+	     	<thead style="text-align: center;">
+	     		<th>Processor</th>
+	     		<th>HDD</th>
+	     		<th>RAM</th>
+	     		<th>Operating System</th>
+	     		<th>Remarks</th>
+	     	</thead>
+	     	<tbody id="info_details"></tbody>
+	     </table>	     
+	    </div>	
+		
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="refresh">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script type="text/javascript">
+	$('.info_user').click(function(){
+		var userID = $(this).attr('value');
+
+		$.ajax({
+	      url: '/audit/view_user_configuration/',
+	      dataType: 'JSON',
+	      type: 'GET',
+	      data:
+	      { 
+	        'userID'  : JSON.stringify(userID),	     
+	      },
+	      success : function(obj){
+	      	
+	      	$('#info_details').empty();
+	      	for (var i=0;i<obj['weekly_array'].length;i++){
+	      		$('#info_details').append('<tr><td>'+obj['weekly_array'][i]['info_processor']+'</td><td>'+obj['weekly_array'][i]['info_hdd']+'</td><td>'+obj['weekly_array'][i]['info_ram']+'</td><td>'+obj['weekly_array'][i]['info_operating_sys']+'</td><td>'+obj['weekly_array'][i]['info_remarks']+'</td></tr>')
+	      	}
+
+	      	$('#info_user_name').text(obj['weekly_array'][0]['user_name'])	
+	      	$('#info_user_name').css('font-weight','bold');
+	      },
+	      error : function(err){
+	        console.log(JSON.stringify(err,null,4));
+	      }        
+	    });
+	})
+</script>
+	
+
+{% endblock %}
+
+
+
+
+
+
+	
+	
+	
+	
+	
+	
+
+	
+	
+

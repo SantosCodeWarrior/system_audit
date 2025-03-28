@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+
+ <div class="card">
+    <div class="card-body">
+		<div class="col-md-12">  
+			<h4 style="text-align: center;">View Audit Summary</h4> 
+			<table class="table table-striped table-bordered" id="audit_tracker" style="width:50%;padding:0px;">
+				<thead>
+					<th>S.No</th>
+					<th>Particular</th>
+					<th>Total</th>
+					<th>Location</th>
+				</thead>
+				
+				<tr>
+					<td>1</td>
+					<td style="font-weight: bold">Computers (Included DP Machine)</td>
+					<td style="font-weight: bold">{{total_pc}}</td>
+					<td style="font-weight: bold"></td>
+				</tr>
+				<tr>
+					<td>2</td>
+					<td style="font-weight: italic;text-align: right;">Working on DP Machine</td>
+					<td>{{total_dp}}</td>
+					<td>3<sup>rd</sup> Floor</td>
+				</tr>	
+
+				<tr>
+					<td>3</td>
+					<td style="font-weight: italic;text-align: right;">Working PC on Operator</td>
+					<td>{{tot_opr}}</td>
+					<td>3<sup>rd</sup> Floor</td>
+				</tr>
+
+				<tr>
+					<td>4</td>
+					<td style="font-weight: italic;text-align: right;">Working PC on Master/Team Leader</td>
+					<td>{{tot_master}}</td>
+					<td>3<sup>rd</sup> Floor</td>
+				</tr>
+
+				<tr>
+					<td>5</td>
+					<td style="font-weight: italic;text-align: right;">Working on CHM Department</td>
+					<td>{{tot_chm}}</td>
+					<td>3<sup>rd</sup> Floor</td>
+				</tr>
+
+				<tr>
+					<td>6</td>
+					<td style="font-weight: italic;text-align: right;">Working on IT Department</td>
+					<td>{{tot_it}}</td>
+					<td>3<sup>rd</sup> Floor</td>
+				</tr>
+
+				<tr>
+					<td>7</td>
+					<td style="font-weight: italic;text-align: right;">Working on Reception</td>
+					<td>{{tot_recp}}</td>
+					<td>3<sup>rd</sup> Floor</td>
+				</tr>
+
+				<!-- <tr>
+					<td>8</td>
+					<td style="font-weight: bold">Unused/Damaged Computers</td>
+					<td style="font-weight: bold">{{tot_dage}}</td>
+					<td style="font-weight: bold"></td>
+				</tr>
+
+				<tr>
+					<td>7</td>
+					<td style="font-weight: italic;text-align: right;">Problems</td>
+					<td>{{tot_poor}}</td>
+					<td>Store Room</td>
+				</tr>
+ -->
+
+	
+
+			</table>
+
+			
+		</div>
+	</div>
+</div>
+
+
+
+
+
+{% endblock %}
+
+
+
+
+
